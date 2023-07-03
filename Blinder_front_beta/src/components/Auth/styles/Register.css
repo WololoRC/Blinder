@@ -1,0 +1,13 @@
+
+.form-container-register {
+  padding: 50px;
+  margin-left: 5%;
+  border-radius: 5px;
+}
+
+
+@media (max-width: 360px){
+.login-screen-container{
+  background: black;
+}
+}

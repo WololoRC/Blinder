@@ -1,0 +1,262 @@
+.background-container-login {
+  @apply bg-epicgray  min-h-screen flex flex-row items-center justify-around text-center;
+  font-family: "fira_sans_condensedmedium";
+}
+
+.form-container {
+  padding: 50px;
+  margin-right: 5%;
+  border-radius: 5px;
+}
+
+.background-container {
+  background-image: url("./imgs/tinderbackground.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.text-gradient-purple {
+  background: linear-gradient(to right, #9370db, #800080, #4b0082);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-daisy {
+  background: linear-gradient(-225deg, #ff057c 0%, #7c64d5 48%, #4cc3ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.image-specs {
+  height: 480px;
+  width: 620px;
+}
+
+textarea {
+  width: 100%;
+  height: 150px;
+  resize: vertical;
+}
+
+#charsRemaining {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  color: gray;
+}
+
+.register-container {
+  @apply flex flex-col;
+
+  font-family: sans-serif;
+  border: 0.2px solid;
+  border-radius: 10px;
+  border-color: gray;
+  box-sizing: border-box;
+  padding: 70px 30px;
+}
+
+.register-container label {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  display: block;
+}
+
+.register-container h1 {
+  margin: 0;
+  padding: 0 0 20px;
+  text-align: center;
+  font-size: 20px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-weight: bold;
+}
+
+.register-container input {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.register-container input[type="text"],
+.register-container input[type="password"] {
+  border: none;
+  border-bottom: 1px solid #7678ed;
+  background: transparent;
+}
+
+.submit-button {
+  color: aliceblue;
+  border: none;
+  outline: none;
+  height: 40px;
+  background: #b80f22;
+}
+
+.h2-start {
+  align-self: flex-end;
+  font-weight: bold;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  text-align: center;
+  font-size: 3.5rem;
+}
+
+@font-face {
+  font-family: "yagiuhfno2medium";
+  src: url("./fonts/yagiuhfno2-webfont.woff2") format("woff2"),
+    url("./fonts/yagiuhfno2-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "mulishextralight_italic";
+  src: url("./fonts/mulish-italic-variablefont_wght-webfont.woff2")
+      format("woff2"),
+    url("./fonts/mulish-italic-variablefont_wght-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "fira_sans_condensedmedium";
+  src: url("./fonts/firasanscondensed-medium-webfont.woff2") format("woff2"),
+    url("./fonts/firasanscondensed-medium-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.text-gradient-purple {
+  background: linear-gradient(to right, #9370db, #800080, #4b0082);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-daisy {
+  background: linear-gradient(-225deg, #ff057c 0%, #7c64d5 48%, #4cc3ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.image-specs {
+  height: 15%;
+  width: 25%;
+  margin-left: 2%;
+}
+
+textarea {
+  width: 100%;
+  height: 150px;
+  resize: vertical;
+}
+
+#charsRemaining {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  color: gray;
+}
+
+.register-container-login {
+  @apply flex flex-col;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.register-container-login label {
+  text-align: left;
+  font-weight: bold;
+  display: block;
+}
+
+.register-container-login h1 {
+  margin: 0 0 20px;
+  text-align: center;
+  font-size: 29px;
+}
+/* 
+.register-container-login input {
+  width: 100%;
+  margin-bottom: 20px;
+  background-color: #4b0082;
+} */
+
+.register-container-login input[type="text"],
+.register-container-login input[type="password"] {
+  border: none;
+  border-bottom: 1px solid #7678ed;
+  background: transparent;
+}
+
+.submit-button-login {
+  color: aliceblue;
+  border: none;
+  outline: none;
+  height: 40px;
+  width: 98%;
+  background: #b80f22;
+  margin-top: 20px;
+}
+
+.submit-button-login:hover {
+  background-color: #605b8f;
+}
+
+.h2-start-login {
+  background: white;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  align-self: flex-end;
+  font-weight: bold;
+  font-family: "yagiuhfno2medium";
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+.h1-new {
+  color: white;
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+
+.h2-try {
+  border: 2px;
+  border-radius: 18px;
+  margin-top: 5px;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-right: 10%;
+  padding-left: 10%;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.h2-try:hover {
+  background-color: #3d348b;
+}
+
+.button-blinder {
+  background: linear-gradient(to right, #fc599d, #c159b6, #7c61b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.submit-button-login {
+  border-radius: 5px;
+} 
+
+.submit-button-login:hover {
+  background-color: #d05f7c; 
+}
+
+@media (max-width: 360px){
+  .login-screen-container{
+    background: black;
+  }
+}

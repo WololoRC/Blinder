@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "montserratthin_italic";
+  src: url("./fonts/montserrat-italic-variablefont_wght-webfont.woff2")
+      format("woff2"),
+    url("./fonts/montserrat-italic-variablefont_wght-webfont.woff")
+      format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "sourcesans3";
+  src: url("sourcesans3-italic-variablefont_wght-webfont.woff2") format("woff2"),
+    url("sourcesans3-italic-variablefont_wght-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "yagiuhfno2medium";
+  src: url("./fonts/yagiuhfno2-webfont.woff2") format("woff2"),
+    url("./fonts/yagiuhfno2-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Mitrl";
+  src: url("./fonts/Mitr-SemiBold.ttf") format("truetype");
+  /* Add other font formats if needed */
+}
+
+* {
+  font-family: "Mitrl";
+}
+
+button {
+  font-weight: bold;
+
+  letter-spacing: 1px;
+
+  transition: transform 80ms ease-in;
+  cursor: pointer;
+}
+
+/* button:active {
+  transform: scale(0.95);
+} 
+ 
+button:focus {
+  outline: #fff;
+}   */
+
+body {
+  background-color: white;
+}
