@@ -36,21 +36,23 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const res = await blinder.post("/login/", {
-        username: user,
-        password: password,
-      });
+      if (password) {
+        const res = await blinder.post("/login/", {
+          username: user,
+          password: password,
+        });
 
-      if (res.status === 200) {
-        //auth user
-        setIsLoggedIn(true);
-        setUserData(res.data);
-        setResponse(res);
-        console.log(res);
-        navigate("/app/profile");
-        const token = res.data.token;
-        setheaderSt(token);
-        localStorage.setItem("headerSt", token);
+        if (res.status === 200) {
+          //auth user
+          setIsLoggedIn(true);
+          setUserData(res.data);
+          setResponse(res);
+          console.log(res);
+          navigate("/app/profile");
+          const token = res.data.token;
+          setheaderSt(token);
+          localStorage.setItem("headerSt", token);
+        }
       }
     } catch (err) {
       console.error(err);
@@ -96,6 +98,7 @@ const Login = () => {
                   placeholder="Password"
                   value={password}
                   autoComplete="current-password"
+                  minLength={8}
                 />
 
                 <button className="bg-violet-700 py-3 my-6 rounded font-bold">

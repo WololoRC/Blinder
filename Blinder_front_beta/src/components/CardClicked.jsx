@@ -284,7 +284,7 @@ function CardClicked() {
         <div class="flex flex-wrap place-items-center h-screen medidas">
           {lightMode ? (
             <div
-              className={`border-graygr2 overflow-hidden shadow-transparent transition-transform duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-100 w-80 cursor-pointer m-auto ${
+              className={`border-graygr2 overflow-hidden  shadow-brightblack2 shadow-sm transition-transform duration-500 ease-in-out transform hover:-translate-y-5 rounded-lg h-100 w-80 cursor-pointer m-auto ${
                 cardTransition ? "scale-95" : ""
               }`}
             >
@@ -341,7 +341,7 @@ function CardClicked() {
             </div>
           ) : (
             <div
-              className={`border-graygr2 overflow-hidden shadow-transparent transition-transform duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-100 w-80 cursor-pointer m-auto ${
+              className={`border-graygr2 overflow-hidden shadow-transparent  transition-transform duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-100 w-80 cursor-pointer m-auto ${
                 cardTransition ? "scale-95" : ""
               }`}
             >

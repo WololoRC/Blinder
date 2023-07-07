@@ -42,6 +42,7 @@ function App() {
   const [userTwoTyping, setUserTwoTyping] = useState("");
   const [makeAlert, setMakeAlert] = useState(false);
   const [index, setIndex] = useState(0);
+  const [nameh1, setNameH1] = useState("");
 
   useEffect(() => {
     setLoading(true);
@@ -93,6 +94,8 @@ function App() {
         setMakeAlert,
         index,
         setIndex,
+        nameh1,
+        setNameH1,
       }}
     >
       {loading ? (

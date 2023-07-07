@@ -2,7 +2,8 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../../App";
 import blinder from "../../api/blinder";
-import { IoIosArrowBack } from "react-icons/io";
+import { IoIosSend } from "react-icons/io";
+import { MdLightMode } from "react-icons/md";
 
 // import { db } from "../firebase";
 
@@ -11,15 +12,11 @@ const SendMessage = ({ chatId, chat_uid, myUserId }) => {
 
   //const[firstUser, setFisrtUser] = useState(false);
 
-  const { chatOn, setChatOn } = useContext(UserContext);
+  const { chatOn, setChatOn, lightMode } = useContext(UserContext);
 
   console.log(myUserId + "my user id");
   console.log(chatId + " CHAT ID EN FOOTER");
   console.log(chat_uid + "chat uid en footer");
-
-  const handleArrowBack = () => {
-    setChatOn(!chatOn);
-  };
 
   const handleInputChange = (event) => {
     event.target.value;
@@ -45,21 +42,37 @@ const SendMessage = ({ chatId, chat_uid, myUserId }) => {
   };
 
   return (
-    <div className="bg-gray-200 fixed bottom-0 w-full py-10 shadow-lg">
-      <div className="absolute top-3">
-        <IoIosArrowBack onClick={handleArrowBack} />
-      </div>
-      <form onSubmit={handleSendMessage} className="px-2 containerWrap flex">
+    <div
+      className={
+        lightMode
+          ? "fixed  bg-black1  bottom-0 w-full py-10 shadow-lg"
+          : "bg-white inline-block bottom-0 w-full py-10 shadow-lg "
+      }
+    >
+      <form onSubmit={handleSendMessage} className="px-2 flex">
         <input
           onChange={handleInputChange}
-          className="input w-full focus:outline-none bg-gray-100 rounded-r-none"
+          className={
+            lightMode
+              ? "input w-full focus:outline-none bg-gray-200 rounded-xl overflow-y-auto "
+              : "input w-full focus:outline-none bg-gray-200 rounded-xl overflow-y-auto"
+          }
           type="text"
+          placeholder="Type a message..."
         />
         <button
           type="submit"
-          className="w-auto bg-gray-500 text-white rounded-r-lg px-5 text-sm"
+          className="w-auto  text-white rounded-r-lg px-5 text-sm"
         >
-          Send
+          <IoIosSend
+            style={
+              lightMode
+                ? { border: "2px solid white", borderRadius: "100px" }
+                : ""
+            }
+            color="blue"
+            size={35}
+          />
         </button>
       </form>
     </div>

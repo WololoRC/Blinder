@@ -5,6 +5,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import "./styles/FormularioUsuario.css"; // Archivo de estilos CSS personalizado
 
 import blinder from "../api/blinder";
+import { FiDivide } from "react-icons/fi";
 
 const CreateProfile = () => {
   const [nickname, setNickname] = useState("");
@@ -83,10 +84,18 @@ const CreateProfile = () => {
   };
 
   const renderedTags = tags.map(({ id, tag_name }) => {
+    const isSelected = selectedTags.includes(id);
+
     return (
-      <button key={id} onClick={() => handleClick(id)}>
-        <p className="hover:bg-gray-300 etiqueta">{tag_name}</p>
-      </button>
+      <div className="inline-block" key={id} onClick={() => handleClick(id)}>
+        <p
+          className={`hover:bg-gray-300 etiqueta ${
+            isSelected ? "selected" : ""
+          }`}
+        >
+          {tag_name}
+        </p>
+      </div>
     );
   });
 

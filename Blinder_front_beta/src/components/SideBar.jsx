@@ -21,7 +21,7 @@ function SideBar({ feedData }) {
   const [componentes, setComponentes] = useState([]);
   const [hideComponent, setHideComponent] = useState(false);
 
-  const [chatOn, setChatOn] = useState(false);
+  /* const [chatOn, setChatOn] = useState(false); */
 
   const [chatId, setChatId] = useState("");
 
@@ -33,7 +33,8 @@ function SideBar({ feedData }) {
 
   const [userTwoState, setUserTwoState] = useState("");
 
-  const { userData, lightMode, setIndex } = useContext(UserContext);
+  const { userData, lightMode, setIndex, chatOn, setChatOn, setNameH1 } =
+    useContext(UserContext);
 
   const handleClickMessage = (index) => {
     setChatOn(true);
@@ -70,6 +71,7 @@ function SideBar({ feedData }) {
 
           setChatId(userId);
           setChatUid(messageId);
+          setNameH1(userTwo);
           agregarComponente(userTwo);
         });
       } else if (
@@ -83,6 +85,7 @@ function SideBar({ feedData }) {
 
           setChatId(userId);
           setChatUid(messageId);
+          setNameH1(userOne);
           agregarComponente(userOne);
           setUserOneState(userOne);
         });

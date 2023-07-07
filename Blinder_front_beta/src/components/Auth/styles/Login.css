@@ -249,14 +249,20 @@ textarea {
 
 .submit-button-login {
   border-radius: 5px;
-} 
-
-.submit-button-login:hover {
-  background-color: #d05f7c; 
 }
 
-@media (max-width: 360px){
-  .login-screen-container{
+.submit-button-login:hover {
+  background-color: #d05f7c;
+}
+
+@media (max-width: 360px) {
+  .login-screen-container {
+    background: black;
+  }
+}
+
+@media (max-width: 400px) {
+  .login-screen-container {
     background: black;
   }
 }

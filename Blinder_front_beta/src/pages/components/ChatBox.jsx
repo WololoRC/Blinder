@@ -1,12 +1,12 @@
 import { UserContext } from "../../App";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
 import blinder from "../../api/blinder";
 
 const ChatBox = ({ chatId, myUserId, index }) => {
   const [messages, setMessages] = useState([]);
   const [senderIds, setSenderIds] = useState([]);
   const [userTwo, setUserTwo] = useState("");
-  const { userData } = useContext(UserContext);
+  const { userData, lightMode, setNameH1 } = useContext(UserContext);
 
   const [refMessage, setRefMessage] = useState([]);
 
@@ -64,10 +64,16 @@ const ChatBox = ({ chatId, myUserId, index }) => {
   console.log(myUserId + "im user id");
 
   return (
-    <div className="flex flex-col gap-4">
+    <div
+      className={
+        lightMode
+          ? "overflow-y-scroll flex flex-col gap-4 bg-gradient-to-r from-black1 to-black3 h-full"
+          : "overflow-y-scroll flex flex-col gap-4  h-full bg-gradient-to-r from-white to-gray-100 "
+      }
+    >
       {messages.map((message, index) => {
         const isSender = message.sender.id === myUserId;
-        console.log(myUserId === message.sender.id);
+        /*    console.log(myUserId === message.sender.id); */
         const chatClassName = isSender
           ? "chat-start"
           : "chat-end flex-row-reverse ";
@@ -75,8 +81,8 @@ const ChatBox = ({ chatId, myUserId, index }) => {
           ? "https://robohash.org/" + userData.user.username
           : "https://robohash.org/" + userTwo;
 
-        console.log(JSON.stringify(message.sender));
-        console.log(message.sender.id + " its me");
+        /*   console.log(JSON.stringify(message.sender));
+        console.log(message.sender.id + " its me"); */
 
         return (
           <div className={"flex chat " + chatClassName} key={index}>
@@ -85,7 +91,15 @@ const ChatBox = ({ chatId, myUserId, index }) => {
                 <img src={chatAvatar} alt="Avatar" />
               </div>
             </div>
-            <div className="chat-bubble">{message.msg_content}</div>
+            <div
+              className={
+                lightMode
+                  ? "chat-bubble bg-bluechat text-white"
+                  : "chat-bubble "
+              }
+            >
+              {message.msg_content}
+            </div>
           </div>
         );
       })}

@@ -66,7 +66,10 @@ export default {
       pinkgradient2: "#C159B6",
       bluegradient3: "#7C61B6",
 
+      brightblack2: "#555251",
       white3: "#D7E1EC",
+      bluechat: "#006ffd",
+      brightblack: "#939090",
       
 
       red1: "#FF1F4A",
