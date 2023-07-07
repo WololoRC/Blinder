@@ -10,7 +10,7 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Profile, BlockedUsers, LikeUsers
 from tags.models import Tags
 from .serializers import ProfileSerializer
-from datetime import datetime
+from datetime import datetime, date
 import uuid
 """Views for authentication a Profile managment."""
 
@@ -35,6 +35,7 @@ def signup(request):
     """
     try:
         data = request.data
+        today = date.today()
         user = User.objects.create_user(
             username = data.get('username'),
             password = data.get('password')
@@ -48,6 +49,13 @@ def signup(request):
             description = "",
             birth_date = datetime.strptime(data.get('birth_date'), "%Y-%m-%d")
         )
+
+        if (today.year - profile.birth_date.year) < 18:
+            user.delete()
+            return Response(
+                {'error': 'profile age must be > 18'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
         profile.save()
 
