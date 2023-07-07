@@ -27,6 +27,7 @@ export default {
       pink: colors.pink,
       red: colors.red,
       blue: colors.blue,
+      purple: colors.purple,
       ultrapink : '#FD3A73',
       brightpink: '#be185d',
       brightpink2: '#FDC5F5',
@@ -64,7 +65,23 @@ export default {
       pinkgradient1: "#FC599D",
       pinkgradient2: "#C159B6",
       bluegradient3: "#7C61B6",
+
+      white3: "#D7E1EC",
       
+
+      red1: "#FF1F4A",
+      purple1: "#DE00AA",
+
+      purple2: "#CA0CF5",
+
+      blue1: "#7000DE",
+
+      blue2: "#3000F6",
+
+
+
+      whitegr: "#F5F7FA",
+    graygr2: "#B8C6DB",
 
        gradient: {
           'white-to-rpink': ['white', 'var(--rpink-2)'],

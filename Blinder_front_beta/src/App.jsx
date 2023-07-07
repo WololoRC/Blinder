@@ -38,6 +38,10 @@ function App() {
   const [chatOn, setChatOn] = useState(false);
   const [newMessage, setNewMessage] = useState(false);
   const [usersData, setUsersData] = useState([]);
+  const [lightMode, setLightMode] = useState(true);
+  const [userTwoTyping, setUserTwoTyping] = useState("");
+  const [makeAlert, setMakeAlert] = useState(false);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     setLoading(true);
@@ -81,6 +85,14 @@ function App() {
         setheaderSt,
         usersData,
         setUsersData,
+        lightMode,
+        setLightMode,
+        userTwoTyping,
+        setUserTwoTyping,
+        makeAlert,
+        setMakeAlert,
+        index,
+        setIndex,
       }}
     >
       {loading ? (

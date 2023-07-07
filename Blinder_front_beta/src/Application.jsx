@@ -17,14 +17,7 @@ const Application = ({ userStatus, userData }) => {
 
   return (
     <Routes>
-      <Route
-        index
-        element={
-          <h1>
-            Estas logeado <Link to="/app/create_profile">xd</Link>
-          </h1>
-        }
-      />
+      <Route index />
       {/* <Route path="feed" element={<Feed />} /> */}
       {/* <Route
           path="profile"

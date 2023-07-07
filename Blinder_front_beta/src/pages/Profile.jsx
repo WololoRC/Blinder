@@ -11,6 +11,7 @@ import { RiLogoutBoxLine } from "react-icons/ri";
 import blinder from "../api/blinder";
 
 import axios from "axios";
+import EditProfile from "./EditProfile";
 function Profile() {
   const {
     uidSt,
@@ -20,6 +21,7 @@ function Profile() {
     response,
     setUserData,
     userData,
+    lightMode,
   } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -31,6 +33,24 @@ function Profile() {
   const handleIconClick = () => {
     navigate("/");
   };
+
+  const [position, setPosition] = useState({ top: 0, left: 0 });
+
+  useEffect(() => {
+    const randomizePosition = () => {
+      const randomTop = Math.floor(Math.random() * window.innerHeight);
+      const randomLeft = Math.floor(Math.random() * window.innerWidth);
+      setPosition({ top: randomTop, left: randomLeft });
+    };
+
+    randomizePosition();
+
+    window.addEventListener("resize", randomizePosition);
+
+    return () => {
+      window.removeEventListener("resize", randomizePosition);
+    };
+  }, []);
 
   const renderedTags = tags.map(({ id, tag_name }) => {
     return (
@@ -89,62 +109,71 @@ function Profile() {
     <>
       {userData2 && (
         <>
-          <div className="body bg-gradient-to-l from-black1 to-black3 h-screen">
-            <div className="start-button-div">
-              <button className="start-button">
-                <Link to="/app/feed">Start Matching</Link>
-                <GiPlayerNext className="ml-5" />
-              </button>
-            </div>
-          </div>
-          <div class="center bg-gradient-to-l from-black1 to-black3 flex h-screen w-screen justify-center">
-            <div class="card">
-              <div class="additional">
-                <div class="user-card">
-                  <div className="avatar2">
-                    {" "}
-                    <img src={link} alt="" />{" "}
+          <div
+            className={
+              lightMode ? "bg-gradient-to-r from-black1 to-black3 pb-56" : ""
+            }
+          >
+            <div className="">
+              <div className="w-full">
+                <div
+                  className={
+                    lightMode
+                      ? "flex flex-col justify-center max-w-lg mx-auto  bg-black2 shadow-xl rounded-xl p-5"
+                      : "flex flex-col justify-center max-w-lg mx-auto bg-white shadow-xl rounded-xl p-5"
+                  }
+                >
+                  <div>
+                    <button onClick={handleLogout}>
+                      <RiLogoutBoxLine color={lightMode ? "white" : ""} />
+                    </button>
                   </div>
-                  <div class="points center">{userData2.user.username}</div>
+                  <div className="">
+                    <img
+                      className="w-32 mx-auto shadow-xl border-solid border-indigo rounded-full"
+                      src={link}
+                      alt="Profile face"
+                    />
+                  </div>
+                  <div className="mt-5">
+                    <p className="text-center text-xl sm:text-2xl font-semibold text-red1">
+                      {userData2.user.username}
+                    </p>
+                    <div className="flex justify-end">
+                      <button onClick={handleEditClick}>
+                        <FaEdit color={lightMode ? "white" : ""} />
+                      </button>
+                    </div>
+                    <p
+                      className={
+                        lightMode
+                          ? "text-xs sm:text-base text-justify text-white pt-2 pb-4 px-5 w-auto inline-block border-b-2"
+                          : "text-xs sm:text-base text-justify text-black pt-2 pb-4 px-5 w-auto inline-block border-b-2"
+                      }
+                    >
+                      {userData2.description}
+                    </p>
 
-                  <defs>
-                    <clipPath id="scene">
-                      <circle cx="125" cy="125" r="115" />
-                    </clipPath>
-                    <clipPath id="lips">
-                      <path d="M 106,132 C 113,127 125,128 125,132 125,128 137,127 144,132 141,142  134,146  125,146  116,146 109,142 106,132 Z" />
-                    </clipPath>
-                  </defs>
-                  <circle cx="125" cy="125" r="120" fill="rgba(0,0,0,0.15)" />
-                </div>
-                <div class="more-info">
-                  <h1 className="mr-5">Tags</h1>
-                  <div class="coords">
-                    <div class="mt-5 tags">
-                      {userData2.owner_tags.map(({ id, tag_name }) => {
+                    <div className="flex align-center justify-center mt-4">
+                      {/* {userData2.owner_tags.map(({ id, tag_name }) => {
                         return (
                           <button key={id} onClick={() => handleClick(id)}>
-                            <p className="tag-style text-xs mr-5">{tag_name}</p>
+                            <p className="bg-purple2 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-2xl text-white whitespace-nowrap">
+                              {tag_name}
+                            </p>
                           </button>
                         );
-                      })}
+                      })} */}
+                    </div>
+                    <div className="start-button-div">
+                      <button className="bg-red1 text-white start-button transform transition-all hover:scale-110">
+                        <Link to="/app/feed">Let's match!</Link>
+                        <GiPlayerNext className="ml-5" />
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="general bg-black2 text-white">
-                <h1 className="">Description</h1>
-                <p className="user-desc">{userData2.description}</p>
-              </div>
-            </div>
-            <button onClick={handleLogout} className="flex-container">
-              <RiLogoutBoxLine size={25} className="" />
-              <h3 className="flex-item">Log Out</h3>
-            </button>
-            <div className="edit-btn">
-              <button onClick={handleEditClick}>
-                <FaEdit color="white" />
-              </button>
             </div>
           </div>
         </>

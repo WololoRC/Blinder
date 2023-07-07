@@ -2,7 +2,7 @@ import { UserContext } from "../../App";
 import { useEffect, useState, useContext } from "react";
 import blinder from "../../api/blinder";
 
-const ChatBox = ({ chatId, myUserId, userIndex }) => {
+const ChatBox = ({ chatId, myUserId, index }) => {
   const [messages, setMessages] = useState([]);
   const [senderIds, setSenderIds] = useState([]);
   const [userTwo, setUserTwo] = useState("");
@@ -10,31 +10,25 @@ const ChatBox = ({ chatId, myUserId, userIndex }) => {
 
   const [refMessage, setRefMessage] = useState([]);
 
-  console.log(userIndex + "im the user index");
-
   useEffect(() => {
     const fetchMessages = async () => {
       try {
         const response = await blinder.get(`/chat/inbox/${userData.id}/`);
         const chat = response.data;
 
-        console.log(JSON.stringify(response.data) + "im the text messages");
-
         if (
           Array.isArray(response.data["as user_one"]) &&
           response.data["as user_one"].length === 0
         ) {
-          const userMessages = response.data["as user_two"][
-            userIndex
-          ].messages.map((message) => message);
+          const userMessages = response.data["as user_two"][index].messages.map(
+            (message) => message
+          );
           const userSenderIds = response.data["as user_two"][
-            userIndex
+            index
           ].messages.map((message) => message.sender.id);
 
           const userTwo =
-            response.data["as user_two"][userIndex]["user_one"]["user"][
-              "username"
-            ];
+            response.data["as user_two"][index]["user_one"]["user"]["username"];
 
           setUserTwo(userTwo);
 
@@ -42,18 +36,16 @@ const ChatBox = ({ chatId, myUserId, userIndex }) => {
           setMessages(userMessages);
           setRefMessage(userMessages);
         } else {
-          const userMessages = response.data["as user_one"][
-            userIndex
-          ].messages.map((message) => message);
+          const userMessages = response.data["as user_one"][index].messages.map(
+            (message) => message
+          );
 
           const userSenderIds = response.data["as user_one"][
-            userIndex
+            index
           ].messages.map((message) => message.sender.id);
 
           const userOne =
-            response.data["as user_one"][userIndex]["user_two"]["user"][
-              "username"
-            ];
+            response.data["as user_one"][index]["user_two"]["user"]["username"];
 
           setUserTwo(userOne);
 
@@ -67,13 +59,15 @@ const ChatBox = ({ chatId, myUserId, userIndex }) => {
     };
 
     fetchMessages();
-  }, [userIndex, userData]);
+  }, [userData.id, refMessage, index]);
+
+  console.log(myUserId + "im user id");
 
   return (
-    <div className="flex flex-col gap-4 bg-gradient-to-r h-full from-black1 to-black3 ">
+    <div className="flex flex-col gap-4">
       {messages.map((message, index) => {
         const isSender = message.sender.id === myUserId;
-        /*    console.log(myUserId === message.sender.id); */
+        console.log(myUserId === message.sender.id);
         const chatClassName = isSender
           ? "chat-start"
           : "chat-end flex-row-reverse ";
@@ -81,8 +75,8 @@ const ChatBox = ({ chatId, myUserId, userIndex }) => {
           ? "https://robohash.org/" + userData.user.username
           : "https://robohash.org/" + userTwo;
 
-        /*   console.log(JSON.stringify(message.sender));
-        console.log(message.sender.id + " its me"); */
+        console.log(JSON.stringify(message.sender));
+        console.log(message.sender.id + " its me");
 
         return (
           <div className={"flex chat " + chatClassName} key={index}>

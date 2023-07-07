@@ -21,47 +21,26 @@ function SideBar({ feedData }) {
   const [componentes, setComponentes] = useState([]);
   const [hideComponent, setHideComponent] = useState(false);
 
+  const [chatOn, setChatOn] = useState(false);
+
   const [chatId, setChatId] = useState("");
 
   const [chat_uid, setChatUid] = useState("");
 
   const [myUserId, setMyUserId] = useState("");
 
-  const [users, setUsers] = useState([]);
-
   const [userOneState, setUserOneState] = useState("");
 
   const [userTwoState, setUserTwoState] = useState("");
 
-  const [userIndex, setUserIndex] = useState(0);
-
-  const {
-    clicked,
-    setClicked,
-    navbarState,
-    setNavbarState,
-    globalName,
-    userData,
-    globalSkipIndex,
-    chatOn,
-    setChatOn,
-    usersData,
-    setUsersData,
-  } = useContext(UserContext);
-
-  const toggleHide = () => {
-    setHideComponent((prevHideComponent) => !prevHideComponent);
-    setClicked(!clicked);
-  };
+  const { userData, lightMode, setIndex } = useContext(UserContext);
 
   const handleClickMessage = (index) => {
-    setUserIndex(index);
     setChatOn(true);
-
-    console.log(JSON.stringify(usersData[userIndex]) + " IM USER DATA INDEX");
+    setIndex(index);
   };
 
-  /*   const agregarComponente = (name) => {
+  const agregarComponente = (name) => {
     if (name) {
       const nuevoComponente = (
         <div onClick={handleClickMessage}>
@@ -73,144 +52,45 @@ function SideBar({ feedData }) {
         nuevoComponente,
       ]);
     }
-  }; */
-
-  const agregarComponente = (name) => {
-    if (name) {
-      setComponentes((prevComponentes) => [
-        ...prevComponentes,
-        <MessagesBar name={name} />,
-      ]);
-    }
   };
 
-  /*   useEffect(() => {
+  useEffect(() => {
     const getChats = async () => {
       const res = await blinder.get(`/chat/inbox/${userData.id}/`);
       console.log(JSON.stringify(res) + "soy el chat");
 
       if (
         Array.isArray(res.data["as user_one"]) &&
-        res.data["as user_one"].length === 0
+        res.data["as user_one"].length > 0
       ) {
-        const userTwo =
-          res.data["as user_two"][0]["user_one"]["user"]["username"];
+        res.data["as user_one"].forEach((chatData) => {
+          const userTwo = chatData["user_two"]["user"]["username"];
+          const userId = chatData["user_two"]["id"];
+          const messageId = chatData.id;
 
-        const userId = res.data["as user_two"][0]["user_one"]["id"];
-        setChatId(userId);
+          setChatId(userId);
+          setChatUid(messageId);
+          agregarComponente(userTwo);
+        });
+      } else if (
+        Array.isArray(res.data["as user_two"]) &&
+        res.data["as user_two"].length > 0
+      ) {
+        res.data["as user_two"].forEach((chatData) => {
+          const userOne = chatData["user_one"]["user"]["username"];
+          const userId = chatData["user_one"]["id"];
+          const messageId = chatData.id;
 
-        const messageId = res.data["as user_two"][0].id;
-        console.log(messageId);
-        setChatUid(messageId);
-
-        agregarComponente(userTwo);
-      } else {
-        const userOne =
-          res.data["as user_one"][0]["user_two"]["user"]["username"];
-
-        setMyUserId(userOne);
-        const userId = res.data["as user_one"][0]["user_two"]["id"];
-        setChatId(userId);
-        const messageId = res.data["as user_one"][0].id;
-
-        console.log(messageId);
-        setChatUid(messageId);
-        agregarComponente(userOne);
-        setUserOneState(userOne);
+          setChatId(userId);
+          setChatUid(messageId);
+          agregarComponente(userOne);
+          setUserOneState(userOne);
+        });
       }
       setMyUserId(userData.id);
-    
     };
     getChats();
-  }, [userData.id]); */
-
-  /*   useEffect(() => {
-    const getChats = async () => {
-      try {
-        const response = await blinder.get(`/chat/inbox/${userData.id}/`);
-        const data = response.data;
-
-        const userOneChats = data["as user_one"] || [];
-        const userTwoChats = data["as user_two"] || [];
-
-        const userOneNames = userOneChats.map(
-          (chat) => chat["user_two"]["user"]["username"]
-        );
-        const userTwoNames = userTwoChats.map(
-          (chat) => chat["user_one"]["user"]["username"]
-        );
-
-        const allUsers = [...userOneNames, ...userTwoNames];
-        setUsers(allUsers);
-
-        userOneChats.forEach((chat) => {
-          const userId = chat["user_two"]["id"];
-          setChatId(userId);
-          const messageId = chat.id;
-          console.log(messageId);
-          setChatUid(messageId);
-          agregarComponente(chat["user_two"]["user"]["username"]);
-        });
-
-        userTwoChats.forEach((chat) => {
-          const userId = chat["user_one"]["id"];
-          setChatId(userId);
-          const messageId = chat.id;
-          console.log(messageId);
-          setChatUid(messageId);
-          agregarComponente(chat["user_one"]["user"]["username"]);
-        });
-
-        setMyUserId(userData.id);
-      } catch (error) {
-        console.error("Could not fetch chats:", error);
-      }
-    };
-
-    getChats();
-  }, [userData.id]); */
-
-  useEffect(() => {
-    const getChats = async () => {
-      try {
-        const response = await blinder.get(`/chat/inbox/${userData.id}/`);
-        const data = response.data;
-
-        const userOneChats = data["as user_one"] || [];
-        const userTwoChats = data["as user_two"] || [];
-
-        const allUsersData = [
-          ...userOneChats.map((chat) => chat["user_two"]["id"]),
-          ...userTwoChats.map((chat) => chat["user_one"]["id"]),
-        ];
-        setUsersData(allUsersData);
-
-        userOneChats.forEach((chat) => {
-          const userId = chat["user_two"]["id"];
-          // setChatId(userId);
-          const messageId = chat.id;
-          console.log(messageId);
-          setChatUid(messageId);
-          agregarComponente(chat["user_two"]["user"]["username"]);
-        });
-
-        userTwoChats.forEach((chat) => {
-          const userId = chat["user_one"]["id"];
-          setChatId(userId);
-          const messageId = chat.id;
-          console.log(messageId);
-          // setChatUid(messageId);
-          agregarComponente(chat["user_one"]["user"]["username"]);
-        });
-
-        setMyUserId(userData.id);
-      } catch (error) {
-        console.error("Could not fetch chats:", error);
-      }
-    };
-
-    getChats();
-  }, [usersData.id]);
+  }, [userData.id]);
 
   const renderedComponents = componentes.map((component, index) => (
     <div key={index} onClick={() => handleClickMessage(index)}>
@@ -220,32 +100,49 @@ function SideBar({ feedData }) {
 
   if (chatOn) {
     return (
-      <ChatContainer
-        /*   chatId={chatId} */
-        chat_uid={chat_uid}
-        myUserId={myUserId}
-        userIndex={userIndex}
-      />
+      <ChatContainer chatId={chatId} chat_uid={chat_uid} myUserId={myUserId} />
     );
   }
 
   return (
     <>
-      <div className="drawer bg-gradient-to-r from-black1 to-black3">
+      <div
+        className={
+          lightMode
+            ? "drawer bg-gradient-to-r from-black1 to-black3"
+            : "drawer bg-gradient-to-r from-white to-gray-300"
+        }
+      >
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
           <Matches />
           <label
             htmlFor="my-drawer"
-            className="bg-epicblack text-white absolute top-0 left-0 ml-20 mt-2"
+            className={
+              lightMode
+                ? "bg-epicblack text-black absolute top-0 left-0 ml-20 mt-2"
+                : "bg-white text-white absolute top-0 left-0 ml-20 mt-2"
+            }
           >
-            <BsChatDots />
+            <BsChatDots color={lightMode ? "white" : "black"} />
           </label>
         </div>
         <div className="drawer-side">
           <label htmlFor="my-drawer" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-80 h-full bg-epicblack text-base-content">
-            <div className="flex flex-col bg-epicblack border-solid sidebar-container h-screen overflow-y-auto flex-shrink ">
+          <ul
+            className={
+              lightMode
+                ? "menu p-4 w-80 h-full bg-epicblack text-base-content"
+                : "menu p-4 w-80 h-full bg-white text-base-content"
+            }
+          >
+            <div
+              className={
+                lightMode
+                  ? "flex flex-col bg-epicblack border-solid sidebar-container h-screen overflow-y-auto flex-shrink"
+                  : "flex flex-col bg-white border-solid sidebar-container h-screen overflow-y-auto flex-shrink"
+              }
+            >
               <div>{renderedComponents}</div>
             </div>
           </ul>

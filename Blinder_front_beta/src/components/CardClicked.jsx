@@ -46,6 +46,7 @@ function CardClicked() {
     setGlobalName,
     setChatId,
     setGlobalSkipIndex,
+    lightMode,
   } = useContext(UserContext);
 
   const handleYesBlock = () => {
@@ -151,10 +152,6 @@ function CardClicked() {
       console.log(`ID ${index + 1}: ${id}`);
     });
 
-    useEffect(() => {
-      console.log(globaSkipIndex);
-    }, [setGlobalSkipIndex]);
-
     setCardTransition(!cardTransition);
     setTimeout(() => {
       setSkipIndex(skipIndex + 1);
@@ -167,10 +164,13 @@ function CardClicked() {
     });
 
     const hasCommonId = likeList2.includes(userData.id);
-
+    console.log(hasCommonId + "Im has common ID");
     if (hasCommonId) {
       setGlobalName(userNickname);
-      setMakeAlert(!makeAlert);
+      setMakeAlert(true);
+      setTimeout(() => {
+        setMakeAlert(false);
+      }, 2000);
     } else {
       console.log("No common IDs");
     }
@@ -232,7 +232,6 @@ function CardClicked() {
         <>
           <div class="flex flex-wrap place-items-center h-screen medidas">
             <div
-              id="card-background"
               className={`overflow-hidden shadow-transparent transition-transform duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-100 w-80 md:w-80 cursor-pointer m-auto ${
                 cardTransition ? "scale-95" : ""
               }`}
@@ -283,57 +282,121 @@ function CardClicked() {
         </>
       ) : (
         <div class="flex flex-wrap place-items-center h-screen medidas">
-          <div
-            id="card-background"
-            className={`overflow-hidden shadow-transparent transition-transform duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-100 w-80 cursor-pointer m-auto ${
-              cardTransition ? "scale-95" : ""
-            }`}
-          >
-            <a href="#" class="w-full block h-full">
-              <div class="bg-black2 w-full p-4">
-                <p class="text-indigo-500 text-2xl text-cente font-custom text-white name-age-container pt-5 font-extrabold">
-                  {userNickname}
-                </p>
+          {lightMode ? (
+            <div
+              className={`border-graygr2 overflow-hidden shadow-transparent transition-transform duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-100 w-80 cursor-pointer m-auto ${
+                cardTransition ? "scale-95" : ""
+              }`}
+            >
+              <a href="#" class="w-full block h-full">
+                <div class={"bg-black2 w-full p-4"}>
+                  <p
+                    class={
+                      "text-indigo-500 text-2xl text-cente font-custom text-white name-age-container pt-5 font-extrabold"
+                    }
+                  >
+                    {userNickname}
+                  </p>
 
-                <p class="text-white font-custom h-60">{userDescription}</p>
+                  <p class={"text-graygr2 font-custom h-60"}>
+                    {userDescription}
+                  </p>
 
-                <div class="flex items-center mt-2">
-                  <div class="pl-3">
-                    <div class="text-gray-600 text-sm new-tags">
-                      {tags.map(({ id, tag_name }) => {
-                        return (
-                          <button key={id}>
-                            <p className="tag-style mx-3">{tag_name}</p>
-                          </button>
-                        );
-                      })}
+                  <div class="flex items-center mt-2">
+                    <div class="pl-3">
+                      <div class="text-gray-600 text-sm new-tags">
+                        {tags.map(({ id, tag_name }) => {
+                          return (
+                            <button key={id}>
+                              <p className="tag-style mx-3">{tag_name}</p>
+                            </button>
+                          );
+                        })}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </a>
+              </a>
 
-            <div className="buttons">
-              <img
-                className="h-12 transform transition-all duration-300 hover:scale-110"
-                src={Block}
-                alt="block-button"
-                onClick={blockUser}
-              />
-              <img
-                className="h-12 transform transition-all duration-300 hover:scale-110"
-                src={Loveicon}
-                alt="like-button"
-                onClick={likeUser}
-              />
-              <img
-                className="h-12 transform transition-all duration-300 hover:scale-110"
-                src={Skip}
-                onClick={handleSkip}
-                alt="skip-button"
-              />
+              <div className="buttons2">
+                <img
+                  className="h-12 transform transition-all duration-300 hover:scale-110"
+                  src={Block}
+                  alt="block-button"
+                  onClick={blockUser}
+                />
+                <img
+                  className="h-12 transform transition-all duration-300 hover:scale-110"
+                  src={Loveicon}
+                  alt="like-button"
+                  onClick={likeUser}
+                />
+                <img
+                  className="h-12 transform transition-all duration-300 hover:scale-110"
+                  src={Skip}
+                  onClick={handleSkip}
+                  alt="skip-button"
+                />
+              </div>
             </div>
-          </div>
+          ) : (
+            <div
+              className={`border-graygr2 overflow-hidden shadow-transparent transition-transform duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-100 w-80 cursor-pointer m-auto ${
+                cardTransition ? "scale-95" : ""
+              }`}
+            >
+              <a href="#" class="w-full block h-full">
+                <div class={"bg-white w-full p-4"}>
+                  <p
+                    class={
+                      "text-indigo-500 text-2xl text-cente font-custom text-black2 name-age-container2 pt-5 font-extrabold "
+                    }
+                  >
+                    {userNickname}
+                  </p>
+
+                  <p class={"text-graygr2 font-custom h-60"}>
+                    {userDescription}
+                  </p>
+
+                  <div class="flex items-center mt-2">
+                    <div class="pl-3">
+                      <div class="text-gray-600 text-sm new-tags">
+                        {tags.map(({ id, tag_name }) => {
+                          return (
+                            <button key={id}>
+                              <p className="tag-style mx-3">{tag_name}</p>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+
+              <div className="buttons">
+                <img
+                  className="h-12 transform transition-all duration-300 hover:scale-110"
+                  src={Block}
+                  alt="block-button"
+                  onClick={blockUser}
+                />
+                <img
+                  className="h-12 transform transition-all duration-300 hover:scale-110"
+                  src={Loveicon}
+                  alt="like-button"
+                  onClick={likeUser}
+                />
+                <img
+                  className="h-12 transform transition-all duration-300 hover:scale-110"
+                  src={Skip}
+                  onClick={handleSkip}
+                  alt="skip-button"
+                />
+              </div>
+            </div>
+          )}
         </div>
       )}
     </>

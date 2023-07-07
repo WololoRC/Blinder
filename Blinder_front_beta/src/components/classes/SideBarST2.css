@@ -178,9 +178,14 @@
   }
 } */
 
-#messages {
-  border: 0.5px solid;
-  border-color: #4e4e4e;
+.messages {
+  cursor: pointer;
+}
+
+.messages2 {
+  border-top: 0.1px solid;
+  border-bottom: 0.1px solid;
+  border-color: rgb(112, 0, 222);
   cursor: pointer;
 }
 
