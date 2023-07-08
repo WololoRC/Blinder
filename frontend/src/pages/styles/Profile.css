@@ -1,0 +1,106 @@
+.main-div {
+  background: red;
+  max-height: 400px;
+}
+
+.avatar-div {
+  max-width: 35%;
+  height: 10%;
+  margin-bottom: 75%;
+}
+
+.avatar-div h1 {
+  color: aliceblue;
+  margin-top: 2px;
+  text-align: center;
+  font-size: 5rem;
+}
+
+.tags-div {
+  display: flex;
+
+  color: white;
+  background: #292929;
+  width: 100%;
+  height: 100%;
+}
+
+.myimage {
+  margin: auto;
+  margin-top: 1rem;
+  background: #393934;
+  border: 1px solid;
+  border-color: white;
+  border-radius: 100%;
+}
+
+.mytags-div {
+  flex: 1;
+  justify-content: center;
+}
+
+.mytags-deep {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #292929;
+}
+
+.mytags-div h1 {
+  font-size: 2rem;
+  white-space: nowrap;
+}
+
+.mytags-div span {
+  display: inline-block;
+  background: indigo;
+  margin-right: 10px;
+  font-size: 18px;
+  justify-content: space-between;
+  margin-top: 15%;
+  flex-wrap: nowrap;
+  border: 2px;
+  padding: 2px;
+  border-radius: 3.5px;
+}
+
+.your-description {
+  margin-left: 170%;
+  white-space: nowrap;
+  font-size: 1.5rem;
+  padding-top: 50px;
+}
+
+.img-container {
+  border: 2px solid;
+  border-radius: 100%;
+  border-color: #cf4265;
+}
+
+.body {
+  padding-top: 10px;
+}
+
+.tag-style {
+  align-items: center;
+  color: rgb(46, 34, 95);
+  font-weight: normal;
+
+  color: rgb(231, 148, 214);
+}
+
+.start-button-div {
+  display: flex;
+  justify-content: center;
+}
+
+.start-button {
+  display: flex;
+  align-items: center;
+  color: aliceblue;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+
+  margin-top: 5px;
+}

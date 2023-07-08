@@ -1,0 +1,160 @@
+/* @font-face {
+  font-family: 'yagiuhfno2medium';
+  src: url('./fonts/yagiuhfno2-webfont.woff2') format('woff2'),
+       url('./fonts/yagiuhfno2-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+} */
+
+.formulario-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 6rem;
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding-left: 10%;
+  padding-bottom: 10%;
+}
+
+.formulario-container h1 {
+  font-size: 2rem;
+  color: black;
+  text-align: center;
+  margin-bottom: 27px;
+  margin-right: 10%;
+  font-family: "Mitrl";
+  color: white;
+}
+
+.input-nickname {
+  border: 2px solid;
+  border-color: rgb(171, 154, 154);
+  border-radius: 7px;
+  padding-bottom: 1rem;
+  padding-top: 0.5rem;
+  padding-right: 35%;
+  padding-left: 1%;
+  background-color: #f3f0f0;
+}
+
+.input-nickname::placeholder {
+  text-align: center;
+  margin-right: 20%;
+}
+
+.input-descripcion {
+  border: 2px solid;
+  border-color: rgb(176, 170, 170);
+  border-radius: 8px;
+  background-color: #f3f0f0;
+  width: 95%;
+}
+
+.label-description {
+  font-size: 25px;
+  font-family: "yagiuhfno2medium";
+}
+
+.label-birthdate {
+  font-family: "yagiuhfno2medium";
+  font-size: 18px;
+}
+
+.input-descripcion::placeholder {
+  padding: 15px;
+}
+
+.birthdate-container {
+  border: 2px solid;
+  border-color: rgb(176, 170, 170);
+  border-radius: 8px;
+  background-color: #f3f0f0;
+}
+
+.formulario {
+  display: flex;
+  flex-grow: 1;
+}
+
+.formulario-izquierda {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.formulario-derecha {
+  flex: 1;
+  flex-grow: 1;
+  padding-right: 1%;
+  max-height: 250px;
+}
+
+.etiqueta {
+  display: inline-block;
+  padding: 5px 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  background-color: white;
+  cursor: pointer;
+  color: black;
+  border: 2px solid;
+  border-color: rgb(161, 155, 155);
+  border-radius: 14px;
+}
+
+.selected {
+  display: inline-block;
+  padding: 5px 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  background-color: #c5c1c1;
+  cursor: pointer;
+  color: black;
+  border: 2px solid;
+  border-color: rgb(161, 155, 155);
+  border-radius: 14px;
+}
+
+.etiqueta:hover {
+  background-color: rgb(209 213 219); /* bg-gray-300 */
+}
+
+.etiqueta.seleccionada {
+  background-color: #eeecec;
+}
+
+.nickname-label {
+  display: block;
+  margin-bottom: 5px;
+  font-family: "yagiuhfno2medium";
+  font-size: 20px;
+}
+
+.more-tag {
+  border: 2px solid;
+  background-color: white;
+}
+
+.label-tags {
+  display: block;
+  padding: 5px;
+  font-size: 1.5rem;
+  font-family: "yagiuhfno2medium";
+}
+
+.submit {
+  /* Doesnt work dont know why */
+  background: #8a2387;
+
+  background: -webkit-linear-gradient(to left, #e94057, #e94058);
+
+  background: linear-gradient(to left, #e94040, #e94058);
+
+  border: 2px solid;
+  border-color: rgb(105, 102, 102);
+  border-radius: 10px;
+  color: white;
+
+  padding-left: 5%;
+  padding-right: 5%;
+}
