@@ -209,10 +209,11 @@ function CardClicked() {
               <span>You have made a match!</span>
             </div> */
             <div
-              class="mb-4 rounded-lg bg-success-100 px-6 py-5 text-base text-success-700 flex justify-center"
+              class="mb-4 rounded-lg bg-success-100 px-6 py-5 text-base text-success-700 flex justify-center absolute center mt-12"
               role="alert"
+              style={{ zIndex: 1 }}
             >
-              A simple success alert with
+              You have made a new match!
             </div>
           )}
         </div>

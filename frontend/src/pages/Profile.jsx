@@ -111,7 +111,7 @@ function Profile() {
         <>
           <div
             className={
-              lightMode ? "bg-gradient-to-r from-black1 to-black3 pb-56" : ""
+              lightMode ? "bg-gradient-to-r from-black1 to-black3 pb-96" : ""
             }
           >
             <div className="">
