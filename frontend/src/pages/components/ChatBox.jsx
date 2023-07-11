@@ -65,7 +65,7 @@ const ChatBox = ({ chatId, myUserId, index }) => {
 
   return (
     <div
-      className={lightMode ? "message-container" : "message-container-white"}
+      className={lightMode ? "message-container bg-gradient-to-r from-black1 to-black3  " : "message-container-white"}
     >
       <div
         className={
