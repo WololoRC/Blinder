@@ -1,5 +1,5 @@
 // import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../../App";
 import blinder from "../../api/blinder";
 import { IoIosSend } from "react-icons/io";
@@ -15,6 +15,8 @@ const SendMessage = ({ chatId, chat_uid, myUserId }) => {
 
   const { chatOn, setChatOn, lightMode } = useContext(UserContext);
 
+  const [sended, setSended] = useState(false);
+
   console.log(myUserId + "my user id");
   console.log(chatId + " CHAT ID EN FOOTER");
   console.log(chat_uid + "chat uid en footer");
@@ -24,23 +26,78 @@ const SendMessage = ({ chatId, chat_uid, myUserId }) => {
     setMessages(event.target.value);
   };
 
-  const handleSendMessage = async (e) => {
-    e.preventDefault();
-    if (messages.trim() !== "") {
-      const newMessage = {
-        sender: myUserId,
-        reciever: chatId,
-        msg_content: messages,
-      };
+  
+  
+  // ...importaciones y código anterior...
 
-      try {
-        await blinder.put(`/chat/messages/${chat_uid}/`, newMessage);
-        // actualizar los mensajes en la ventana de chat
-      } catch (error) {
-        console.error("Error al enviar el mensaje:", error);
-      }
+const [sentMessageVisible, setSentMessageVisible] = useState(false);
+
+const handleSendMessage = async (e) => {
+  e.preventDefault();
+  if (messages.trim() !== "") {
+    const newMessage = {
+      sender: myUserId,
+      reciever: chatId,
+      msg_content: messages,
+    };
+
+    try {
+      await blinder.put(`/chat/messages/${chat_uid}/`, newMessage);
+      // actualizar los mensajes en la ventana de chat
+      setMessages(""); // Vaciar el estado después de enviar el mensaje
+      setSentMessageVisible(true); // Mostrar el mensaje enviado en el input
+      setTimeout(() => {
+        setSentMessageVisible(false); // Ocultar el mensaje enviado después de 2 segundos
+      }, 2000);
+    } catch (error) {
+      console.error("Error al enviar el mensaje:", error);
     }
-  };
+  }
+};
+
+// ...resto del código...
+
+return (
+  <div
+    className={
+      lightMode
+        ? " bg-black4 fixed bottom-0 w-full py-10 shadow-lg"
+        : "bg-white fixed bottom-0 w-full py-10 shadow-lg "
+    }
+  >
+    <form onSubmit={handleSendMessage} className="px-2 flex">
+      <input
+        onChange={handleInputChange}
+        className={
+          lightMode
+            ? "input w-full focus:outline-none bg-gray-200 rounded-xl  "
+            : "input w-full focus:outline-none bg-gray-200 rounded-xl "
+        }
+        type="text"
+        placeholder="Type a message..."
+        value={messages}
+      />
+      <button
+        type="submit"
+        className="w-auto  text-white rounded-r-lg px-5 text-sm"
+      >
+        <IoIosSend
+          style={
+            lightMode
+              ? { border: "2px solid white", borderRadius: "100px" }
+              : ""
+          }
+          color="blue"
+          size={35}
+        />
+      </button>
+    </form>
+    {sentMessageVisible && (
+      <p className="text-gray-500 text-sm mt-2">Message sent!</p>
+    )}
+  </div>
+);
+
 
   return (
     <div

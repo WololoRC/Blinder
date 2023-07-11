@@ -70,8 +70,8 @@ const ChatBox = ({ chatId, myUserId, index }) => {
       <div
         className={
           lightMode
-            ? "flex flex-col gap-4 bg-gradient-to-r from-black1 to-black3 h-full"
-            : " flex flex-col gap-4  h-full bg-gradient-to-r from-white to-gray-100 "
+            ? "flex flex-col gap-4 bg-gradient-to-r from-black1 to-black3 h-full  "
+            : " flex flex-col gap-4   h-full bg-gradient-to-r from-white to-gray-100 "
         }
       >
         {messages.map((message, index) => {

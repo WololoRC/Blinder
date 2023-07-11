@@ -133,7 +133,7 @@ function CardClicked() {
     setMakeAlertLike(true);
     setTimeout(() => {
       setCardTransition(false);
-    }, 500); // Delay the state update to match the transition duration
+    }, 10); // Delay the state update to match the transition duration
 
     // Set makeAlertSkip to false after 3 seconds (3000 milliseconds)
     setTimeout(() => {
@@ -165,16 +165,29 @@ function CardClicked() {
 
     const hasCommonId = likeList2.includes(userData.id);
     console.log(hasCommonId + "Im has common ID");
-    if (hasCommonId) {
-      setGlobalName(userNickname);
+ if (hasCommonId) {
+  setGlobalName(userNickname);
+
+  if (makeAlertLike) {
+    setMakeAlert(false);
+    setTimeout(() => {
       setMakeAlert(true);
       setTimeout(() => {
         setMakeAlert(false);
       }, 2000);
-    } else {
-      console.log("No common IDs");
-    }
+    }, 200);
+  } else {
+    // Delay the makeAlert by an additional 500 milliseconds
+    setTimeout(() => {
+      setMakeAlert(true);
+      setTimeout(() => {
+        setMakeAlert(false);
+      }, 2000);
+    }, 700);
+  }
   };
+
+  }
 
   return (
     <>

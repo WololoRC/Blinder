@@ -33,7 +33,7 @@ function SideBar({ feedData }) {
 
   const [userTwoState, setUserTwoState] = useState("");
 
-  const { userData, lightMode, setIndex, chatOn, setChatOn, setNameH1 } =
+  const { userData, lightMode, setIndex, chatOn, setChatOn, setNameH1, globalName } =
     useContext(UserContext);
 
   const handleClickMessage = (index) => {
@@ -93,7 +93,7 @@ function SideBar({ feedData }) {
       setMyUserId(userData.id);
     };
     getChats();
-  }, [userData.id]);
+  }, [globalName]);
 
   const renderedComponents = componentes.map((component, index) => (
     <div key={index} onClick={() => handleClickMessage(index)}>
