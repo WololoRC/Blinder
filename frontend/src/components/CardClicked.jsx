@@ -1,17 +1,18 @@
 import { useEffect, useState, useContext } from "react";
-import Loveicon from "../assets/LoveIcon.png";
-import Block from "../assets/Block.png";
+/* import Loveicon from "../assets/LoveIcon.png";
+import Block from "../assets/Block.png"; */
 import Skip from "../assets/Skip.png";
 import SideBarST from "./classes/SideBarST.css";
 import "./classes/CardClickedST.css";
 import "./classes/Rain.css";
 import myimage from "../assets/B‌linderDef.png";
 import { UserContext } from "../App";
-import { FaChevronDown } from "react-icons/fa";
-import { FaChevronUp } from "react-icons/fa";
 import blinder from "../api/blinder";
-import { IoTerminalSharp } from "react-icons/io5";
-import { FiTrendingUp } from "react-icons/fi";
+
+import greenHeart from "../assets/likeIcon.png";
+import blockCross from "../assets/blockCross.png";
+
+import redArrow from "../assets/redArrow.png";
 
 function CardClicked() {
   const [data, setData] = useState([]);
@@ -35,6 +36,7 @@ function CardClicked() {
   const [skipedUserName, setSkipedUserName] = useState("");
   const [sureBlock, setSureBlock] = useState(false);
   const [alertBlock, setAlertBlock] = useState(false);
+  const [userAge, setUserAge] = useState("");
 
   const {
     clicked,
@@ -47,11 +49,13 @@ function CardClicked() {
     setChatId,
     setGlobalSkipIndex,
     lightMode,
+    showBlock,
+    setShowBlock,
   } = useContext(UserContext);
 
   const handleYesBlock = () => {
     setMakeAlertBlock(false);
-    setSureBlock(true);
+    setSureBlock(!sureBlock);
     setAlertBlock(true);
 
     setTimeout(() => {
@@ -63,6 +67,7 @@ function CardClicked() {
       setAlertBlock(false);
     }, 600);
   };
+
 
   const handleSkip = () => {
     console.log(skipIndex);
@@ -87,13 +92,21 @@ function CardClicked() {
         const tagNames = firstUser.owner_tags.map((tag) => tag.tag_name);
         const descName = firstUser.description;
         const nickname = firstUser.user.username;
+        const age = firstUser.age;
         const userId = firstUser.id;
+
+        const tagsSplited = tagNames.map((tagName) => tagName.split(","));
+
         setCurrentUserId(userId);
         setChatId(userId);
-        setTags(tagNames);
+        setTags(tagsSplited);
+        setUserAge(age);
         setUserNickname(nickname);
         setSkipedUserName(nickname);
         setUserDescription(descName);
+      }
+      if (skipIndex === resFeed.data.length - 1) {
+        setSkipIndex(0);
       }
     }
 
@@ -104,29 +117,9 @@ function CardClicked() {
     setUserId(userData.id);
   }, [userId]);
 
-  const handleNavbarState = () => {
-    setNavbarState(!navbarState);
-
-    setSwitchArrow(!switchArrow);
-  };
-
-  const blockUser = async () => {
-    setMakeAlertBlock(true);
-    if (sureBlock) {
-      try {
-        await blinder.put(`/profile/blocked_list/update/${userData.id}/`, {
-          id_list: currentUserId,
-        });
-      } catch (err) {
-        console.error(err);
-      }
-      setCardTransition(!cardTransition);
-      setTimeout(() => {
-        setSkipIndex(skipIndex + 1);
-        setCardTransition(false);
-      }, 500);
-    }
-  };
+  useEffect(() => {
+    console.log(tags + "Im the tags aaaa");
+  }, [tags]);
 
   const likeUser = async () => {
     console.log(currentUserId + "im the current user");
@@ -165,28 +158,58 @@ function CardClicked() {
 
     const hasCommonId = likeList2.includes(userData.id);
     console.log(hasCommonId + "Im has common ID");
- if (hasCommonId) {
-  setGlobalName(userNickname);
+    if (hasCommonId) {
+      setGlobalName(userNickname);
 
-  if (makeAlertLike) {
-    setMakeAlert(false);
-    setTimeout(() => {
-      setMakeAlert(true);
-      setTimeout(() => {
+      if (makeAlertLike) {
         setMakeAlert(false);
-      }, 2000);
-    }, 200);
-  } else {
-    // Delay the makeAlert by an additional 500 milliseconds
-    setTimeout(() => {
-      setMakeAlert(true);
-      setTimeout(() => {
-        setMakeAlert(false);
-      }, 2000);
-    }, 700);
-  }
+        setTimeout(() => {
+          setMakeAlert(true);
+          setTimeout(() => {
+            setMakeAlert(false);
+          }, 2000);
+        }, 200);
+      } else {
+        // Delay the makeAlert by an additional 500 milliseconds
+        setTimeout(() => {
+          setMakeAlert(true);
+          npm;
+          setTimeout(() => {
+            setMakeAlert(false);
+          }, 2000);
+        }, 700);
+      }
+    }
   };
 
+  const blockUser = async () => {
+    setMakeAlertBlock(true);
+    if (sureBlock) {
+     
+      try {
+        await blinder.put(`/profile/blocked_list/update/${userData.id}/`, {
+          id_list: currentUserId,
+        });
+      } catch (err) {
+        console.error(err);
+      }
+      setCardTransition(!cardTransition);
+      
+      setTimeout(() => {
+       
+        setCardTransition(false);
+       
+      }, 500);
+      setSkipIndex(skipIndex + 1);
+    }
+  };
+
+  console.log(showBlock + "soy show bloookc");
+
+  if(showBlock){
+    setTimeout(() => {
+      setShowBlock(false);
+    }, 2000);
   }
 
   return (
@@ -236,16 +259,19 @@ function CardClicked() {
             role="alert"
             style={{ zIndex: 1 }}
           >
-            <span>Liked {skipedUserName}</span>
+            <span class="flex items-center">
+              Liked {skipedUserName}
+              <img src={greenHeart} class="h-5 ml-1" alt="greenHeart" />
+            </span>
           </div>
         )}
-        {alertBlock && (
+        {showBlock && (
           <div
             class="mb-4 mt-12 center absolute rounded-lg bg-danger-100 px-6 py-5 text-base text-danger-700"
             role="alert"
             style={{ zIndex: 1 }}
           >
-            <span>Blocked {skipedUserName}</span>
+            <span className="flex items-center">Blocked {skipedUserName} <img src={blockCross} class="h-5 ml-1" alt="blockCross" /></span>
           </div>
         )}
       </div>
@@ -280,21 +306,21 @@ function CardClicked() {
               </a>
 
               <div className="buttons">
-                <img
+                  <img
                   className="h-12 transform transition-all duration-300 hover:scale-110"
-                  src={Block}
+                  src={blockCross}
                   alt="block-button"
                   onClick={blockUser}
                 />
-                <img
+                <img 
                   className="h-12 transform transition-all duration-300 hover:scale-110"
-                  src={Loveicon}
+                  src={greenHeart}
                   alt="like-button"
                   onClick={likeUser}
                 />
                 <img
                   className="h-12 transform transition-all duration-300 hover:scale-110"
-                  src={Skip}
+                  src={redArrow}
                   onClick={handleSkip}
                   alt="skip-button"
                 />
@@ -303,123 +329,125 @@ function CardClicked() {
           </div>
         </>
       ) : (
-        <div class="flex flex-wrap place-items-center h-screen medidas">
-          {lightMode ? (
-            <div
-              className={`border-graygr2 overflow-hidden  shadow-brightblack2 shadow-sm transition-transform duration-500 ease-in-out transform hover:-translate-y-5 rounded-lg h-100 w-80 cursor-pointer m-auto ${
-                cardTransition ? "scale-95" : ""
-              }`}
-            >
-              <a href="#" class="w-full block h-full">
-                <div class={"bg-black2 w-full p-4"}>
-                  <p
-                    class={
-                      "text-indigo-500 text-2xl text-cente font-custom text-white name-age-container pt-5 font-extrabold"
-                    }
-                  >
-                    {userNickname}
-                  </p>
+        <>
+          {/*    <div className={lightMode ? "text-white flex justify-end ml-64 mt-2 text-sm absolute" : "text-black flex justify-end ml-64 mt-2 text-sm absolute"}> 
+        Log Out
+      </div> */}{" "}
+          {/* HERES THE LOG OUT*/}
+          <div class="flex flex-wrap place-items-center h-screen medidas">
+            {lightMode ? (
+              <div
+                className={`overflow-hidden cardblack shadow-sm transition-transform duration-500 ease-in-out transform hover:-translate-y-5 rounded-lg h-100 w-80 cursor-pointer m-auto ${
+                  cardTransition ? "scale-95" : ""
+                }`}
+              >
+                <a href="#" class="w-full block h-full">
+                  <div class={"bg-black2 w-full p-4"}>
+                    <p
+                      class={
+                        "text-indigo-500 text-2xl text-cente font-custom text-white name-age-container pt-5 font-extrabold"
+                      }
+                    >
+                      {userNickname}, {userAge}
+                    </p>
 
-                  <p class={"text-graygr2 font-custom h-60"}>
-                    {userDescription}
-                  </p>
+                    <p class={"text-graygr2 font-custom h-60"}>
+                      {userDescription}
+                    </p>
 
-                  <div class="flex items-center mt-2">
-                    <div class="pl-3">
-                      <div class="text-gray-600 text-sm new-tags">
-                        {tags.map(({ id, tag_name }) => {
+                    <div class="flex items-center mt-2">
+                      <div class="pl-3">
+                        <div class="text-pink2 text-sm new-tags font-custom">
+                          {/*  {tags.map(({ tag_name, id }) => {
                           return (
                             <button key={id}>
-                              <p className="tag-style mx-3">{tag_name}</p>
+                              <p className="new-tags text-white mx-3">{tag_name}</p>
                             </button>
                           );
-                        })}
+                        })} */}
+                          {tags.join(", ")}
+                        </div>
                       </div>
                     </div>
                   </div>
+                </a>
+
+                <div className="buttons2">
+                  <img
+                    className="h-12 transform transition-all duration-300 hover:scale-110"
+                    src={blockCross}
+                    alt="block-button"
+                    onClick={blockUser}
+                  />
+                  <img
+                    className="h-12 transform transition-all duration-300 hover:scale-110"
+                    src={greenHeart}
+                    alt="like-button"
+                    onClick={likeUser}
+                  />
+                  <img
+                    className="h-12 transform transition-all duration-300 hover:scale-110"
+                    src={redArrow}
+                    onClick={handleSkip}
+                    alt="skip-button"
+                  />
                 </div>
-              </a>
-
-              <div className="buttons2">
-                <img
-                  className="h-12 transform transition-all duration-300 hover:scale-110"
-                  src={Block}
-                  alt="block-button"
-                  onClick={blockUser}
-                />
-                <img
-                  className="h-12 transform transition-all duration-300 hover:scale-110"
-                  src={Loveicon}
-                  alt="like-button"
-                  onClick={likeUser}
-                />
-                <img
-                  className="h-12 transform transition-all duration-300 hover:scale-110"
-                  src={Skip}
-                  onClick={handleSkip}
-                  alt="skip-button"
-                />
               </div>
-            </div>
-          ) : (
-            <div
-              className={`border-graygr2 overflow-hidden shadow-transparent  transition-transform duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg h-100 w-80 cursor-pointer m-auto ${
-                cardTransition ? "scale-95" : ""
-              }`}
-            >
-              <a href="#" class="w-full block h-full">
-                <div class={"bg-white w-full p-4"}>
-                  <p
-                    class={
-                      "text-indigo-500 text-2xl text-cente font-custom text-black2 name-age-container2 pt-5 font-extrabold "
-                    }
-                  >
-                    {userNickname}
-                  </p>
+            ) : (
+              <div
+                className={`border-graygr2 overflow-hidden shadow-2xl transition-transform duration-500 ease-in-out transform hover:-translate-y-5  rounded-lg h-100 w-80 cursor-pointer m-auto  ${
+                  cardTransition ? "scale-95" : ""
+                }`}
+              >
+                <a href="#" class="w-full block h-full">
+                  <div class={"bg-white w-full p-4"}>
+                    <p
+                      class={
+                        "text-indigo-500 text-2xl text-cente font-custom text-black2 name-age-container2 pt-5 font-extrabold "
+                      }
+                    >
+                      {userNickname}, {userAge}
+                    </p>
 
-                  <p class={"text-graygr2 font-custom h-60"}>
-                    {userDescription}
-                  </p>
+                    <p class={"text-graygr2 font-custom h-60"}>
+                      {userDescription}
+                    </p>
 
-                  <div class="flex items-center mt-2">
-                    <div class="pl-3">
-                      <div class="text-gray-600 text-sm new-tags">
-                        {tags.map(({ id, tag_name }) => {
-                          return (
-                            <button key={id}>
-                              <p className="tag-style mx-3">{tag_name}</p>
-                            </button>
-                          );
-                        })}
+                    <div class="flex items-center mt-2">
+                      <div class="pl-3">
+                        <div class="text-pink2 text-sm font-custom ">
+                         
+                           {tags.join(", ")} 
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </a>
+                </a>
 
-              <div className="buttons">
-                <img
-                  className="h-12 transform transition-all duration-300 hover:scale-110"
-                  src={Block}
-                  alt="block-button"
-                  onClick={blockUser}
-                />
-                <img
-                  className="h-12 transform transition-all duration-300 hover:scale-110"
-                  src={Loveicon}
-                  alt="like-button"
-                  onClick={likeUser}
-                />
-                <img
-                  className="h-12 transform transition-all duration-300 hover:scale-110"
-                  src={Skip}
-                  onClick={handleSkip}
-                  alt="skip-button"
-                />
+                <div className="buttons">
+                  <img
+                    className="h-12 transform transition-all duration-300 hover:scale-110"
+                    src={blockCross}
+                    alt="block-button"
+                    onClick={blockUser}
+                  />
+                  <img
+                    className="h-12 transform transition-all duration-300 hover:scale-110"
+                    src={greenHeart}
+                    alt="like-button"
+                    onClick={likeUser}
+                  />
+                  <img
+                    className="h-12 transform transition-all duration-300 hover:scale-110"
+                    src={redArrow}
+                    onClick={handleSkip}
+                    alt="skip-button"
+                  />
+                </div>
               </div>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        </>
       )}
     </>
   );

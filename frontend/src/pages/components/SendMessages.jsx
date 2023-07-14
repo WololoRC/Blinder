@@ -87,13 +87,13 @@ return (
               ? { border: "2px solid white", borderRadius: "100px" }
               : ""
           }
-          color="blue"
+          color="pink"
           size={35}
         />
       </button>
     </form>
     {sentMessageVisible && (
-      <p className="text-gray-500 text-sm mt-2">Message sent!</p>
+      <p className="text-gray-500 text-sm mt-2"></p>
     )}
   </div>
 );

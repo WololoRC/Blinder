@@ -25,6 +25,16 @@
     background-size: cover;
   }
 
+  @media (max-width: 401px) {
+    .background-img {
+      background-image: url("./assets/blinderback.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
+  
+  
+
   .h1-main {
     font-size: 50px;
   }
@@ -154,20 +164,3 @@
   }
 }
 
-.blinking-dot {
-  position: relative;
-  display: inline-block;
-}
-
-.blinking-dot::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: -8px;
-  transform: translateY(-50%);
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #e4e2e1;
-  animation: blink 1s infinite;
-}

@@ -4,11 +4,16 @@ import { useNavigate } from "react-router-dom";
 const useAuth = (userStatus) => {
   const navigate = useNavigate();
 
+  console.log(userStatus + "HOLAAAAAAAAAAAAAAAAAA");
+
   useEffect(() => {
-    if (!userStatus) {
-      navigate("/login");
+    if (userStatus) {
+        return;
     }
-  }, [userStatus, navigate]);
+    else{
+      navigate("/login")
+    }
+  }, []);
 };
 
 export default useAuth;

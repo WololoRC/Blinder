@@ -46,9 +46,10 @@ const Login = () => {
           //auth user
           setIsLoggedIn(true);
           setUserData(res.data);
+          localStorage.setItem("userData", JSON.stringify(res.data)); 
           setResponse(res);
           console.log(res);
-          navigate("/app/profile");
+          navigate("/app/feed");
           const token = res.data.token;
           setheaderSt(token);
           localStorage.setItem("headerSt", token);

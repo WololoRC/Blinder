@@ -1,17 +1,55 @@
 import { Card } from "./Card";
 import { UserContext } from "../App";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CiDark } from "react-icons/ci";
+import blinder from "../api/blinder";
 import { MdDarkMode } from "react-icons/md";
 export function Matches() {
-  const { userData, lightMode, setLightMode } = useContext(UserContext);
+  const { userData, lightMode, setLightMode, headerSt } = useContext(UserContext);
 
-  const link = "https://robohash.org/" + userData.user.username;
+  const [userDataFrom, setUserDataFrom] = useState({})
+ 
+
+    if (headerSt){
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const res = await blinder.get(`/profile/${userData.id}`, {
+            headers: {
+              Authorization: `token ${headerSt}`,
+            },
+          });
+          const userDataFromApi = res.data;
+          setUserDataFrom(userDataFromApi)
+          console.log(res + "its meeee lolencio");
+  
+          // Resto del código...
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      fetchData();
+    }, []);
+    }
+  
+ 
+
+  
+  const link =
+    userDataFrom &&
+    userDataFrom.user &&
+    "https://robohash.org/" + userDataFrom.user.username;
+
+
+    const name =  userDataFrom &&
+    userDataFrom.user && userDataFrom.user.username
+  
 
   const navigate = useNavigate();
   return (
     <>
+
       <div
         className="flex items-center justify-between absolute ml-20"
         id="MyProfile"
@@ -33,7 +71,7 @@ export function Matches() {
               alt="userAvatar"
             />
           </div>
-          {userData.user.username}
+          {name}
         </button>
         <div className="">
           <button

@@ -64,7 +64,7 @@ function Profile() {
     navigate("/app/editprof/");
   };
 
-  if (headerSt) {
+  if (headerSt && userData !== null) {
     useEffect(() => {
       const fetchData = async () => {
         try {
@@ -80,7 +80,7 @@ function Profile() {
           setUserData(res.data);
           console.log(headerSt + "its me");
           setUserNickname(userData.user.username);
-
+  
           // Resto del código...
         } catch (error) {
           console.error(error);
@@ -89,6 +89,13 @@ function Profile() {
       fetchData();
     }, []);
   }
+
+  
+  
+  
+  
+  
+  
 
   const handleLogout = () => {
     localStorage.removeItem("headerSt"); // Remove token from local storage
@@ -124,8 +131,9 @@ function Profile() {
                   }
                 >
                   <div>
-                    <button onClick={handleLogout}>
-                      <RiLogoutBoxLine color={lightMode ? "white" : ""} />
+                    <button >
+                    <Link to="/app/feed"><RiLogoutBoxLine color={lightMode ? "white" : ""} /></Link>
+                    
                     </button>
                   </div>
                   <div className="">
@@ -166,9 +174,8 @@ function Profile() {
                       })} */}
                     </div>
                     <div className="start-button-div">
-                      <button className="bg-red1 text-white start-button transform transition-all hover:scale-110">
-                        <Link to="/app/feed">Let's match!</Link>
-                        <GiPlayerNext className="ml-5" />
+                      <button onClick={handleLogout} className="bg-redlol text-white start-button">
+                       Sign Out
                       </button>
                     </div>
                   </div>

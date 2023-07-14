@@ -7,6 +7,7 @@ const ChatBox = ({ chatId, myUserId, index }) => {
   const [senderIds, setSenderIds] = useState([]);
   const [userTwo, setUserTwo] = useState("");
   const { userData, lightMode, setNameH1 } = useContext(UserContext);
+  const [userOne, setUserOne] = useState("");
 
   const [refMessage, setRefMessage] = useState([]);
 
@@ -30,7 +31,14 @@ const ChatBox = ({ chatId, myUserId, index }) => {
           const userTwo =
             response.data["as user_two"][index]["user_one"]["user"]["username"];
 
+            
+          const userOne =
+          response.data["as user_two"][index]["user_two"]["user"]["username"];
+
+
           setUserTwo(userTwo);
+
+          setUserOne(userOne);
 
           setSenderIds(userSenderIds);
           setMessages(userMessages);
@@ -47,7 +55,14 @@ const ChatBox = ({ chatId, myUserId, index }) => {
           const userOne =
             response.data["as user_one"][index]["user_two"]["user"]["username"];
 
+            
+          const userTwo =
+          response.data["as user_one"][index]["user_one"]["user"]["username"];
+
+
           setUserTwo(userOne);
+
+          setUserOne(userTwo)
 
           setSenderIds(userSenderIds);
           setMessages(userMessages);
@@ -59,13 +74,20 @@ const ChatBox = ({ chatId, myUserId, index }) => {
     };
 
     fetchMessages();
-  }, [userData.id, refMessage, index]);
+  }, [userData.id,  index]);
 
   console.log(myUserId + "im user id");
 
+  const link =
+  userData &&
+  userData.user &&
+  "https://robohash.org/" + userData.user.username;
+  
+
+
   return (
     <div
-      className={lightMode ? "message-container bg-gradient-to-r from-black1 to-black3  " : "message-container-white"}
+      className={lightMode ? "message-container bg-gradient-to-r from-black1 to-black3 h-screen " : "message-container-white h-screen"}
     >
       <div
         className={
@@ -80,16 +102,16 @@ const ChatBox = ({ chatId, myUserId, index }) => {
           const chatClassName = isSender
             ? "chat-start"
             : "chat-end flex-row-reverse ";
-          const chatAvatar = isSender
-            ? "https://robohash.org/" + userData.user.username
+            const chatAvatar = isSender
+            ? ""
             : "https://robohash.org/" + userTwo;
 
           const chatBubbleClassNameBlack = `chat-bubble ${
-            isSender ? "bg-bluechat text-white" : ""
+            isSender ? "bg-pink2 text-white" : ""
           }`;
 
           const chatBubbleClassNameWhite = `chat-bubble ${
-            isSender ? "bg-bluechat text-white" : ""
+            isSender ? "bg-pink2 text-white" : ""
           }`;
           /*   console.log(JSON.stringify(message.sender));
         console.log(message.sender.id + " its me"); */
@@ -98,7 +120,7 @@ const ChatBox = ({ chatId, myUserId, index }) => {
             <div className={"flex chat " + chatClassName} key={index}>
               <div className="chat-image avatar">
                 <div className="w-10 rounded-full">
-                  <img src={chatAvatar} alt="Avatar" />
+                 {isSender ? "" : <img src={chatAvatar ? chatAvatar : ""} alt="Avatar" />}
                 </div>
               </div>
               <div

@@ -69,6 +69,11 @@ const CreateProfile = () => {
     console.log(selectedTags);
     console.log(descripcion);
 
+    if (selectedTags.length === 0 || selectedTags.length > 5) {
+      // No se han seleccionado tags, mostrar mensaje de error o realizar alguna acción
+      return;
+    }
+
     try {
       const res = await blinder.put(`/profile/${userData.id}/`, {
         description: descripcion,

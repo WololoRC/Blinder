@@ -189,7 +189,7 @@
 }
 
 .buttons img {
-  border: 5px solid;
+  border: 2px solid;
   border-radius: 100%;
   border-color: #b8c6db;
   margin-right: 5%;
@@ -203,12 +203,48 @@
   justify-content: center;
 }
 
+.cardblack{
+  border: 0.2px solid transparent;
+  border-radius: 100%;
+/*   background: 
+    linear-gradient(to right, #1A181B, #1A181B), 
+    linear-gradient(to right, red , blue); 
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box; */
+/*   background: 
+  linear-gradient(to right, #1A181B, #1A181B), 
+  linear-gradient(to left, #cf4265 , #fee2e2); 
+background-clip: padding-box, border-box;
+background-origin: padding-box, border-box; */
+
+background: 
+linear-gradient(to right, #1A181B, #1A181B), 
+/* linear-gradient(to right,  #1D4350 , #f43f5e);  */
+linear-gradient(to left,  #000000 , #434343); 
+background-clip: padding-box, border-box;
+background-origin: padding-box, border-box;
+}                
+
 .buttons2 img {
-  border: 4px solid;
+  border: 2px solid;
   border-radius: 100%;
   margin-right: 5%;
   margin-left: 5%;
-  border-color: rgb(15, 23, 59);
+  border: 1px solid solid;
+/*   border-color: blue; */
+
+/*   border: 4px solid transparent;
+  border-radius: 100%;
+  background: 
+    linear-gradient(to right, #1A181B, #1A181B), 
+    linear-gradient(to right, red , blue); 
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box; */
+  
+  /* Other styles */
+/*   width: 100px;
+  height: 40px; */
+  padding: 1px;
 }
 
 .navbar-hidecomponent {

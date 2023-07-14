@@ -135,14 +135,14 @@ function SideBar({ feedData }) {
           <ul
             className={
               lightMode
-                ? "menu p-4 w-80 h-full bg-epicblack text-base-content"
+                ? "menu p-4 w-80 h-full bg-black2 text-base-content"
                 : "menu p-4 w-80 h-full bg-white text-base-content"
             }
           >
             <div
               className={
                 lightMode
-                  ? "flex flex-col bg-epicblack border-solid sidebar-container h-screen overflow-y-auto flex-shrink"
+                  ? "flex flex-col bg-black2 border-solid sidebar-container h-screen overflow-y-auto flex-shrink"
                   : "flex flex-col bg-white border-solid sidebar-container h-screen overflow-y-auto flex-shrink"
               }
             >

@@ -8,9 +8,11 @@ import { UserContext } from "./App";
 import EditProfile from "./pages/EditProfile";
 import ChatContainer from "./pages/ChatContainer";
 import Feed from "./pages/Feed";
+import { ProtectedRoutes } from "./context/ProtectedRoutes";
 
 const Application = ({ userStatus, userData }) => {
-  useAuth(userStatus);
+  const {headerSt} = useContext(UserContext);
+/*   useAuth(headerSt); */
 
   /*  const { response } = useContext(UserContext);
   console.log(response.data.id); */
@@ -27,10 +29,10 @@ const Application = ({ userStatus, userData }) => {
             </div>
           }
         /> */}
-      <Route path="create_profile" element={<CreateProfile />} />
-      <Route path="profile" element={<Profile />} />
-      <Route path="feed" element={<Feed />} />
-      <Route path="editprof" element={<EditProfile />} />
+   <Route path="create_profile" element={ <ProtectedRoutes><CreateProfile /></ProtectedRoutes> } />
+    <Route path="profile" element={<ProtectedRoutes><Profile /></ProtectedRoutes>  } />
+  <Route path="feed" element={ <ProtectedRoutes><Feed /></ProtectedRoutes>  } />
+  <Route path="editprof" element={  <ProtectedRoutes><EditProfile /></ProtectedRoutes>  } />
     </Routes>
   );
 };

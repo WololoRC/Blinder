@@ -1,24 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { UserContext } from "../App";
 import { useContext } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import "./styles/FormularioUsuario.css";
 import { RxCrossCircled } from "react-icons/rx";
+import {BsTrash3} from "react-icons/bs"
 
 import blinder from "../api/blinder";
 
 const EditProfile = () => {
-  const [descripcion, setDescripcion] = useState("");
+
   const [selectedTags, setSelectedTags] = useState([]);
   const [tagNames, setTagNames] = useState([]);
   const [removedTags, setRemovedTags] = useState([]);
   const [tagIds, setTagIds] = useState([]);
   const [alertChanges, setAlertChanges] = useState(false);
 
+  const [deleteAccount, setDeleteAccount] = useState(false);
+
+  const navigate = useNavigate();
+
+  const [selected, setSelected] = useState(false);
+
   const [tags, setTags] = useState([]);
 
   const { response, userData, setUserData, setTagsGlobal } =
     useContext(UserContext);
+
+
+    const [descripcion, setDescripcion] = useState(userData.description);
+
+  const handleDeleteAccount = async () => {
+    try {
+      await blinder.delete(`profile/delete/${userData.id}`);
+    } catch (err) {
+      console.error(err);
+    }
+    navigate("/");
+  };
 
   useEffect(() => {
     const fetchTags = async () => {
@@ -59,20 +78,37 @@ const EditProfile = () => {
       setSelectedTags((selectedTags) =>
         selectedTags.filter((selectedTag) => selectedTag !== tag)
       );
+      setSelected(true);
       setRemovedTags((removedTags) => [...removedTags, tag]);
     } else {
       setSelectedTags((selectedTags) => [...selectedTags, tag]);
       setRemovedTags((removedTags) =>
         removedTags.filter((removedTag) => removedTag !== tag)
+        
       );
+      setSelected(false);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+
+
+    const form = e.target;
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
     console.log(selectedTags);
     console.log(descripcion);
     console.log(removedTags + "its me");
+
+    
+    if (selectedTags.length === 0 || tagIds.length > 6 || selectedTags.length > 5) {
+      return;
+    }
 
     try {
       const res = await blinder.put(`/profile/${response.data.id}/`, {
@@ -92,24 +128,55 @@ const EditProfile = () => {
     handleSubmitAlert();
   };
 
-  const renderedTags = tags.map(({ id, tag_name }) => {
-    const isSelected = selectedTags.includes(id);
-    const hasTags = tagNames.includes(tag_name);
-    let tagClass = "etiqueta";
 
-    if (hasTags) {
-      tagClass = isSelected ? "etiqueta" : "bg-gray-300 etiqueta";
-    }
-
-    return (
-      <button key={id} onClick={() => handleClick(id)}>
-        <p className={tagClass}>{tag_name}</p>
-      </button>
-    );
-  });
+    const renderedTags = tags.map(({ id, tag_name }) => {
+      const isSelected = selectedTags.includes(id);
+      const hasTags = tagNames.includes(tag_name);
+      let tagClass = "etiqueta";
+    
+      if (hasTags) {
+        if (isSelected && selected) {
+          tagClass += " selected";
+        } else {
+          tagClass += " bg-gray-300";
+        }
+      }
+    
+      return (
+        <div className="inline-block" key={id} onClick={() => handleClick(id)}>
+          <p className={tagClass}>{tag_name}</p>
+        </div>
+      );
+    });
 
   return (
     <>
+      {deleteAccount && (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+          className="bg-white text-black absolute pb-10 pt-10 pr-4 pl-4"
+        >
+          <p className="font-bold text-black">
+            Are you sure you want to delete it?
+          </p>
+          <div className="flex justify-center mt-10 text-center items-center">
+            <button className="mr-3" onClick={handleDeleteAccount}>
+              Yes
+            </button>
+            <button className="ml-3" onClick={() => setDeleteAccount(false)}>
+              No
+            </button>
+          </div>
+        </div>
+      )}
       {alertChanges && (
         <div className="alert alert-success absolute mx-auto w-96 ml-96">
           <svg
@@ -162,6 +229,13 @@ const EditProfile = () => {
             type="submit"
           >
             Submit
+          </button>
+          <button
+            type="button"
+            onClick={() => setDeleteAccount(true)}
+            className="ml-4 text-white font-bold"
+          >
+            <span className="flex items-center">Delete account <BsTrash3 className="ml-1"/></span>
           </button>
         </form>
       </div>

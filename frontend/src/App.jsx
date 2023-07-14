@@ -22,7 +22,7 @@ export const UserContext = createContext();
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState({});
   const [response, setResponse] = useState({});
   const [userNickname, setUserNickname] = useState("");
   const [navbarState, setNavbarState] = useState(true);
@@ -43,17 +43,20 @@ function App() {
   const [makeAlert, setMakeAlert] = useState(false);
   const [index, setIndex] = useState(0);
   const [nameh1, setNameH1] = useState("");
+  const [showBlock, setShowBlock] = useState(false);
 
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, [4000]);
+    }, [2000]);
   }, []);
 
   return (
     <UserContext.Provider
       value={{
+        showBlock,
+        setShowBlock,
         globalSkipIndex,
         chatOn,
         newMessage,
