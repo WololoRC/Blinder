@@ -80,7 +80,7 @@ function Profile() {
           setUserData(res.data);
           console.log(headerSt + "its me");
           setUserNickname(userData.user.username);
-  
+
           // Resto del código...
         } catch (error) {
           console.error(error);
@@ -89,13 +89,6 @@ function Profile() {
       fetchData();
     }, []);
   }
-
-  
-  
-  
-  
-  
-  
 
   const handleLogout = () => {
     localStorage.removeItem("headerSt"); // Remove token from local storage
@@ -118,7 +111,9 @@ function Profile() {
         <>
           <div
             className={
-              lightMode ? "bg-gradient-to-r from-black1 to-black3 pb-96" : "pb-96"
+              lightMode
+                ? "bg-gradient-to-r from-black1 to-black3 pb-96"
+                : "pb-96"
             }
           >
             <div className="">
@@ -126,19 +121,24 @@ function Profile() {
                 <div
                   className={
                     lightMode
-                      ? "flex flex-col justify-center max-w-lg mx-auto  bg-black2 shadow-xl rounded-xl p-5"
-                      : "flex flex-col justify-center max-w-lg mx-auto bg-white shadow-xl rounded-xl p-5"
+                      ? "flex flex-col justify-center max-w-lg mx-auto  bg-black2 shadow-xl rounded-xl p-5 profileDark"
+                      : "flex flex-col justify-center max-w-lg mx-auto bg-white shadow-xl rounded-xl p-5 profile"
                   }
                 >
                   <div>
-                    <button >
-                    <Link to="/app/feed"><RiLogoutBoxLine color={lightMode ? "white" : ""} /></Link>
-                    
+                    <button>
+                      <Link to="/app/feed">
+                        <RiLogoutBoxLine color={lightMode ? "white" : ""} />
+                      </Link>
                     </button>
                   </div>
                   <div className="">
                     <img
-                      className="w-32 mx-auto shadow-xl border-solid border-indigo rounded-full"
+                      className={
+                        lightMode
+                          ? "w-32 mx-auto shadow-xl border-solid rounded-full profileDark"
+                          : "w-32 mx-auto shadow-xl border-solid rounded-full profile"
+                      }
                       src={link}
                       alt="Profile face"
                     />
@@ -174,8 +174,11 @@ function Profile() {
                       })} */}
                     </div>
                     <div className="start-button-div">
-                      <button onClick={handleLogout} className="bg-redlol text-white start-button">
-                       Sign Out
+                      <button
+                        onClick={handleLogout}
+                        className="bg-redlol text-white start-button"
+                      >
+                        Sign Out
                       </button>
                     </div>
                   </div>

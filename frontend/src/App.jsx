@@ -44,6 +44,7 @@ function App() {
   const [index, setIndex] = useState(0);
   const [nameh1, setNameH1] = useState("");
   const [showBlock, setShowBlock] = useState(false);
+  const [matchMade, setMatchMade] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -55,6 +56,8 @@ function App() {
   return (
     <UserContext.Provider
       value={{
+        matchMade,
+        setMatchMade,
         showBlock,
         setShowBlock,
         globalSkipIndex,

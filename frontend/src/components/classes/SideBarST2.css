@@ -183,22 +183,24 @@
 }
 
 .messages2 {
-  border-top: 0.1px solid;
-  border-bottom: 0.1px solid;
-  border-color: rgb(207, 66, 101);
   cursor: pointer;
 }
 
 #avatar {
   margin-top: 10px;
-  border: 2px solid;
+  border: 2px solid transparent;
   border-radius: 100%;
-  border-color: white;
+
+  background: linear-gradient(to right, white, white),
+    linear-gradient(to left, #ef316b, #e85658);
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
 }
 
 #avatarNew {
   margin-top: 10px;
   border: 2px solid;
   border-radius: 100%;
-  border-color: purple;
+  border-color: rgb(231, 42, 106);
+  border-color: rgb(232, 86, 88);
 }

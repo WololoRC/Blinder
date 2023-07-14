@@ -15,7 +15,7 @@ export function MessagesBar({ name }) {
       >
         <div className="flex items-center ml-2">
           <img
-            className="h-20 w-20"
+            className="h-20 w-20 border-pinkmsg rounded-full"
             id={newMessage ? "avatarNew" : "avatar"}
             src={link}
             alt="photo1"

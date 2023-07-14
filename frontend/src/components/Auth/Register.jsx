@@ -46,11 +46,11 @@ const Register = () => {
           const token = res.data.token;
           setheaderSt(token);
 
-          var checkbox = document.getElementById("myCheckbox");
-
+          /*  var checkbox = document.getElementById("myCheckbox"); */
+          /* 
           if (checkbox.checked) {
             localStorage.setItem("headerSt", token);
-          }
+          } */
         }
       } catch (err) {
         console.error(err);

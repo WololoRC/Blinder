@@ -8,6 +8,8 @@ import "./classes/Rain.css";
 import myimage from "../assets/B‌linderDef.png";
 import { UserContext } from "../App";
 import blinder from "../api/blinder";
+import greenHeartF from "../assets/greenHeartF.png";
+import mark from "../assets/mark.png";
 
 import greenHeart from "../assets/likeIcon.png";
 import blockCross from "../assets/blockCross.png";
@@ -51,6 +53,7 @@ function CardClicked() {
     lightMode,
     showBlock,
     setShowBlock,
+    setMatchMade,
   } = useContext(UserContext);
 
   const handleYesBlock = () => {
@@ -67,7 +70,6 @@ function CardClicked() {
       setAlertBlock(false);
     }, 600);
   };
-
 
   const handleSkip = () => {
     console.log(skipIndex);
@@ -105,9 +107,9 @@ function CardClicked() {
         setSkipedUserName(nickname);
         setUserDescription(descName);
       }
-      if (skipIndex === resFeed.data.length - 1) {
+      /* if (skipIndex === resFeed.data.length - 1) {
         setSkipIndex(0);
-      }
+      } */
     }
 
     getTags();
@@ -160,7 +162,6 @@ function CardClicked() {
     console.log(hasCommonId + "Im has common ID");
     if (hasCommonId) {
       setGlobalName(userNickname);
-
       if (makeAlertLike) {
         setMakeAlert(false);
         setTimeout(() => {
@@ -173,6 +174,7 @@ function CardClicked() {
         // Delay the makeAlert by an additional 500 milliseconds
         setTimeout(() => {
           setMakeAlert(true);
+          setMatchMade(true);
           npm;
           setTimeout(() => {
             setMakeAlert(false);
@@ -185,7 +187,6 @@ function CardClicked() {
   const blockUser = async () => {
     setMakeAlertBlock(true);
     if (sureBlock) {
-     
       try {
         await blinder.put(`/profile/blocked_list/update/${userData.id}/`, {
           id_list: currentUserId,
@@ -194,11 +195,9 @@ function CardClicked() {
         console.error(err);
       }
       setCardTransition(!cardTransition);
-      
+
       setTimeout(() => {
-       
         setCardTransition(false);
-       
       }, 500);
       setSkipIndex(skipIndex + 1);
     }
@@ -206,7 +205,7 @@ function CardClicked() {
 
   console.log(showBlock + "soy show bloookc");
 
-  if(showBlock){
+  if (showBlock) {
     setTimeout(() => {
       setShowBlock(false);
     }, 2000);
@@ -261,7 +260,7 @@ function CardClicked() {
           >
             <span class="flex items-center">
               Liked {skipedUserName}
-              <img src={greenHeart} class="h-5 ml-1" alt="greenHeart" />
+              <img src={greenHeartF} class="h-5 ml-1" alt="greenHeart" />
             </span>
           </div>
         )}
@@ -271,7 +270,10 @@ function CardClicked() {
             role="alert"
             style={{ zIndex: 1 }}
           >
-            <span className="flex items-center">Blocked {skipedUserName} <img src={blockCross} class="h-5 ml-1" alt="blockCross" /></span>
+            <span className="flex items-center">
+              Blocked {/* {skipedUserName}{" "} */}
+              <img src={mark} class="h-5 ml-1" alt="blockCross" />
+            </span>
           </div>
         )}
       </div>
@@ -306,13 +308,13 @@ function CardClicked() {
               </a>
 
               <div className="buttons">
-                  <img
+                <img
                   className="h-12 transform transition-all duration-300 hover:scale-110"
                   src={blockCross}
                   alt="block-button"
                   onClick={blockUser}
                 />
-                <img 
+                <img
                   className="h-12 transform transition-all duration-300 hover:scale-110"
                   src={greenHeart}
                   alt="like-button"
@@ -416,8 +418,7 @@ function CardClicked() {
                     <div class="flex items-center mt-2">
                       <div class="pl-3">
                         <div class="text-pink2 text-sm font-custom ">
-                         
-                           {tags.join(", ")} 
+                          {tags.join(", ")}
                         </div>
                       </div>
                     </div>

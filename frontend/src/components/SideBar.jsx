@@ -33,8 +33,16 @@ function SideBar({ feedData }) {
 
   const [userTwoState, setUserTwoState] = useState("");
 
-  const { userData, lightMode, setIndex, chatOn, setChatOn, setNameH1, globalName } =
-    useContext(UserContext);
+  const {
+    userData,
+    lightMode,
+    setIndex,
+    chatOn,
+    setChatOn,
+    setNameH1,
+    globalName,
+    matchMade,
+  } = useContext(UserContext);
 
   const handleClickMessage = (index) => {
     setChatOn(true);
@@ -112,8 +120,16 @@ function SideBar({ feedData }) {
       <div
         className={
           lightMode
-            ? "drawer bg-gradient-to-r from-black1 to-black3"
-            : "drawer bg-gradient-to-r from-white to-gray-300"
+            ? `drawer bg-gradient-to-r from-black1 to-black ${
+                matchMade
+                  ? "lg:drawer-open sm:drawer-open us:drawer-open xs:drawer-open"
+                  : ""
+              }`
+            : `drawer bg-gradient-to-r from-white to-gray-300 ${
+                matchMade
+                  ? "lg:drawer-open sm:drawer-open us:drawer-open xs:drawer-open"
+                  : ""
+              }`
         }
       >
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />

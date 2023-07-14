@@ -8,7 +8,18 @@ export default {
     "./node_modules/tw-elements-react/dist/js/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        "us" : "380px",
+        'xs': '480px',    // Extra small screens
+        'sm': '640px',    // Small screens
+        'md': '768px',    // Medium screens
+        'lg': '1024px',   // Large screens
+        'xl': '1280px',   // Extra large screens
+        '2xl': '1536px',  // Extra extra large screens
+      },
+
+    },
     fontFamily: {
       custom: ["Mitrl", 'Mitrl'],
       /* Add other font families if needed */
@@ -53,6 +64,8 @@ export default {
       epicblack: "#212121",
       fantasyli: "#7678ed",
       fantasyviolet: "#3d348b",
+
+      pinkmsg: "#e72a6a",
 
       black1: "#232027",
       black2: "#1A181B",

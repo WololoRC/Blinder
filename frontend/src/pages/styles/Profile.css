@@ -104,3 +104,23 @@
 
   margin-top: 5px;
 }
+
+.profile {
+  border: 2px solid transparent;
+  border-radius: 100%;
+
+  background: linear-gradient(to right, white, white),
+    linear-gradient(to left, #ef316b, #e85658);
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+}
+
+.profileDark {
+  border: 2px solid transparent;
+  border-radius: 100%;
+
+  background: linear-gradient(to right, #1a181b, #1a181b),
+    linear-gradient(to left, #ef316b, #e85658);
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+}

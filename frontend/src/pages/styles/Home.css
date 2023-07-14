@@ -9,7 +9,7 @@
 
 .background-img {
   background-color: black;
-  background-image: url("./assets/blinderback3.jpg");
+  background-image: url("./assets/blinderback.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -25,16 +25,6 @@
     background-size: cover;
   }
 
-  @media (max-width: 401px) {
-    .background-img {
-      background-image: url("./assets/blinderback.jpg");
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-  }
-  
-  
-
   .h1-main {
     font-size: 50px;
   }
@@ -45,6 +35,26 @@
 
   .lang-icon {
     display: none;
+  }
+}
+
+@media (max-width: 401px) {
+  .background-img {
+    background-image: url("./assets/blinderback.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    .h1-main {
+      font-size: 50px;
+    }
+
+    .lang {
+      display: none;
+    }
+
+    .lang-icon {
+      display: none;
+    }
   }
 }
 
@@ -163,4 +173,3 @@
     opacity: 0;
   }
 }
-
