@@ -1,0 +1,23 @@
+.member-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10%;
+    margin-bottom: 10%;
+    border-radius: 10px;
+    background-color: #4E4E4E;
+  }
+  
+  .member-photo {
+    width: 130px;
+    object-fit: cover; 
+    border-radius: 90px;
+    margin: 2%;
+  }
+
+  .member-name {
+    margin-bottom: 2%;
+    font-weight: bold;
+    font-family: 'Sen', sans-serif;
+    color: #ffffff;
+  }
