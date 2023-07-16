@@ -122,12 +122,12 @@ function SideBar({ feedData }) {
           lightMode
             ? `drawer bg-gradient-to-r from-black1 to-black ${
                 matchMade
-                  ? "lg:drawer-open sm:drawer-open us:drawer-open xs:drawer-open"
+                  ? "lg:drawer-open"
                   : ""
               }`
             : `drawer bg-gradient-to-r from-white to-gray-300 ${
                 matchMade
-                  ? "lg:drawer-open sm:drawer-open us:drawer-open xs:drawer-open"
+                  ? "lg:drawer-open"
                   : ""
               }`
         }

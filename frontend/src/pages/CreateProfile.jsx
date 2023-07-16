@@ -105,7 +105,7 @@ const CreateProfile = () => {
   });
 
   return (
-    <div className="formulario-container bg-gradient-to-r from-black1 to-black3">
+    <div className="formulario-container2 bg-gradient-to-r from-black1 to-black3">
       <h1 className="">Create Profile</h1>
 
       <form onSubmit={handleSubmit}>

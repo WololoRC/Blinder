@@ -60,6 +60,7 @@ function CardClicked() {
     setMakeAlertBlock(false);
     setSureBlock(!sureBlock);
     setAlertBlock(true);
+    setSkipIndex(skipIndex + 1);
 
     setTimeout(() => {
       setCardTransition(false);
@@ -264,7 +265,7 @@ function CardClicked() {
             </span>
           </div>
         )}
-        {showBlock && (
+        {alertBlock && (
           <div
             class="mb-4 mt-12 center absolute rounded-lg bg-danger-100 px-6 py-5 text-base text-danger-700"
             role="alert"
@@ -272,7 +273,7 @@ function CardClicked() {
           >
             <span className="flex items-center">
               Blocked {/* {skipedUserName}{" "} */}
-              <img src={mark} class="h-5 ml-1" alt="blockCross" />
+              <img src={blockCross} class="h-5 ml-1" alt="blockCross" />
             </span>
           </div>
         )}

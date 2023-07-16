@@ -121,8 +121,8 @@ function Profile() {
                 <div
                   className={
                     lightMode
-                      ? "flex flex-col justify-center max-w-lg mx-auto  bg-black2 shadow-xl rounded-xl p-5 profileDark"
-                      : "flex flex-col justify-center max-w-lg mx-auto bg-white shadow-xl rounded-xl p-5 profile"
+                      ? "flex flex-col justify-center max-w-lg mx-auto  bg-black2 shadow-xl rounded-xl p-5"
+                      : "flex flex-col justify-center max-w-lg mx-auto bg-white shadow-xl rounded-xl p-5 "
                   }
                 >
                   <div>
