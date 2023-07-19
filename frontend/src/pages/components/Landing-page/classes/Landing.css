@@ -1,0 +1,113 @@
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: 0;
+  font-size: 40px;
+  height: 15vh;
+}
+
+.description-container {
+  padding: 10px;
+  font-size: 30px;
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  font-size: 30px;
+  margin: 5%;
+}
+
+.features-container {
+  text-align: center;
+  padding: 30px;
+  color: #CF4265;
+}
+
+
+.features-container .features {
+  font-size: 30px;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #CF4265;
+  font-size: 40px;
+  height: 15vh;
+}
+
+
+.features-container {
+  text-align: center;
+  padding: 10px;
+  color: #CF4265;
+  font-size: 30px;
+  padding: 5%;
+  background-color: 0;
+  border-radius: 50px;
+  margin: 10%;
+}
+
+.features {
+  color: #9e96ea;
+  font-size: 20px;
+}
+
+
+.footer-container {
+  background-color: #2e2e2e;
+}
+
+.about {
+  text-align: center;
+  color: #9385ec;
+  font-size: 20px;
+  background-color: rgba(65, 48, 218, 0.8);
+  margin-bottom: 2%;
+}
+
+.team-members {
+  color: #3d348b;
+  display: grid;
+  font-size: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.team-members h3 {
+  color: #CF4265;
+}
+
+.description-section {
+  display: flex;
+  align-items: center;
+}
+
+.signup {
+  text-align: center;
+  padding: 10px;
+  color: #CF4265;
+  font-size: 35px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.icon {
+  font-size: 30px;
+  display: inline;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+
+.icon:hover {
+  color: #CF4265;
+  transform: scale(1.2);
+}
