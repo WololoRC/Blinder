@@ -1,42 +1,14 @@
-import blinder from "./styles/imgs/b1_721.png";
 import "./styles/Home.css";
-import { useState } from "react";
+import blinder from "./styles/imgs/b1_721.png";
 import { IoLanguageOutline } from "react-icons/io5";
 import { useNavigate, Link } from "react-router-dom";
-import { useContext } from "react";
 import Landing from "../components/Landing-page/Landing";
 
 export function Home() {
-  const [showRegister, setShowRegister] = useState(false);
-
   const navigate = useNavigate();
-
-  const [formData, setFormData] = useState({
-    username: "",
-    password: ""
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
   const handleRegisterClick = () => {
     navigate("/register");
-  };
-
-  const handleBackClick = () => {
-    setShowRegister(false);
-  };
-
-  const handleRegisterSubmit = (e) => {
-    e.preventDefault();
-    try {
-      setFormData({ username: "", password: "" });
-      const response = register(formData.username, formData.password);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   return (

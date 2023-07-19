@@ -1,34 +1,23 @@
-import { useEffect, useState, useContext } from "react";
-/* import Loveicon from "../assets/LoveIcon.png";
-import Block from "../assets/Block.png"; */
-import Skip from "../assets/Skip.png";
-import SideBarST from "./classes/SideBarST.css";
+import blinder from "../api/blinder";
+import "./classes/SideBarST.css";
 import "./classes/CardClickedST.css";
 import "./classes/Rain.css";
-import myimage from "../assets/B‌linderDef.png";
-import { UserContext } from "../App";
-import blinder from "../api/blinder";
-
 import greenHeart from "../assets/likeIcon.png";
 import blockCross from "../assets/blockCross.png";
-
 import redArrow from "../assets/redArrow.png";
+import redHeart from "../assets/redHeart.png";
+import { useEffect, useState, useContext } from "react";
+import { UserContext } from "../App";
 
 function CardClicked() {
-  const [data, setData] = useState([]);
   const [currentUserId, setCurrentUserId] = useState("");
-  const [myUser, setMyUser] = useState({});
-  const [nextUser, setNextUser] = useState({});
-  const [prevUserTags, setPrevUserTags] = useState([]);
   const [tags, setTags] = useState([]);
   const [userNickname, setUserNickname] = useState("");
   const [userDescription, setUserDescription] = useState("");
-  const [allTags, setAllTags] = useState("");
   const [ownAllTags, setOwnAllTags] = useState(null);
   const [userId, setUserId] = useState([]);
   const [resFeedData, setResFeedData] = useState([]);
   const [skipIndex, setSkipIndex] = useState(0);
-  const [likedId, setLikedId] = useState("");
   const [makeAlert, setMakeAlert] = useState(false);
   const [makeAlertBlock, setMakeAlertBlock] = useState(false);
   const [makeAlertLike, setMakeAlertLike] = useState(false);
@@ -39,11 +28,6 @@ function CardClicked() {
   const [userAge, setUserAge] = useState("");
 
   const {
-    clicked,
-    navbarState,
-    setNavbarState,
-    switchArrow,
-    setSwitchArrow,
     userData,
     setGlobalName,
     setChatId,
@@ -60,17 +44,14 @@ function CardClicked() {
 
     setTimeout(() => {
       setCardTransition(false);
-    }, 500); // Delay the state update to match the transition duration
+    }, 500);
 
-    // Set makeAlertSkip to false after 3 seconds (3000 milliseconds)
     setTimeout(() => {
       setAlertBlock(false);
     }, 600);
   };
 
-
   const handleSkip = () => {
-    console.log(skipIndex);
     setSkipIndex(skipIndex + 1);
     setGlobalSkipIndex(skipIndex + 1);
     setCardTransition(!cardTransition);
@@ -78,17 +59,12 @@ function CardClicked() {
 
   useEffect(() => {
     async function getTags() {
-      const res = await blinder.get("/tags/");
       const resFeed = await blinder.get(`/profile/feed/${userData.id}`);
       setOwnAllTags(resFeed.data.owner_tags);
       setResFeedData(resFeed.data);
 
-      console.log(JSON.stringify(resFeed));
-
-      // Acceder al primer usuario de la lista
       if (resFeed.data.length > 0) {
-        console.log(skipIndex);
-        const firstUser = resFeed.data[skipIndex]; // Accede al primer elemento
+        const firstUser = resFeed.data[skipIndex];
         const tagNames = firstUser.owner_tags.map((tag) => tag.tag_name);
         const descName = firstUser.description;
         const nickname = firstUser.user.username;
@@ -117,23 +93,17 @@ function CardClicked() {
     setUserId(userData.id);
   }, [userId]);
 
-  useEffect(() => {
-    console.log(tags + "Im the tags aaaa");
-  }, [tags]);
-
   const likeUser = async () => {
     console.log(currentUserId + "im the current user");
     setMakeAlertLike(true);
     setTimeout(() => {
       setCardTransition(false);
-    }, 10); // Delay the state update to match the transition duration
+    }, 10);
 
-    // Set makeAlertSkip to false after 3 seconds (3000 milliseconds)
     setTimeout(() => {
       setMakeAlertLike(false);
     }, 900);
 
-    console.log("liked");
     blinder.put(`/profile/like_list/update/${userData.id}/`, {
       like_id: currentUserId,
     });
@@ -170,7 +140,6 @@ function CardClicked() {
           }, 2000);
         }, 200);
       } else {
-        // Delay the makeAlert by an additional 500 milliseconds
         setTimeout(() => {
           setMakeAlert(true);
           npm;
@@ -185,7 +154,6 @@ function CardClicked() {
   const blockUser = async () => {
     setMakeAlertBlock(true);
     if (sureBlock) {
-     
       try {
         await blinder.put(`/profile/blocked_list/update/${userData.id}/`, {
           id_list: currentUserId,
@@ -194,19 +162,15 @@ function CardClicked() {
         console.error(err);
       }
       setCardTransition(!cardTransition);
-      
+
       setTimeout(() => {
-       
         setCardTransition(false);
-       
       }, 500);
       setSkipIndex(skipIndex + 1);
     }
   };
 
-  console.log(showBlock + "soy show bloookc");
-
-  if(showBlock){
+  if (showBlock) {
     setTimeout(() => {
       setShowBlock(false);
     }, 2000);
@@ -214,36 +178,9 @@ function CardClicked() {
 
   return (
     <>
-      {/*  <div>
-        {switchArrow ? (
-          <button onClick={handleNavbarState}>
-            <FaChevronDown />
-          </button>
-        ) : (
-          <button onClick={handleNavbarState}>
-            <FaChevronUp />
-          </button>
-        )}
-      </div> */}
       <div className="flex relative text-center">
         <div className="div">
           {makeAlert && (
-            /*    <div className="alert alert-success absolute">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="stroke-current shrink-0 h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <span>You have made a match!</span>
-            </div> */
             <div
               class="mb-4 rounded-lg bg-success-100 px-6 py-5 text-base text-success-700 flex justify-center absolute center mt-12"
               role="alert"
@@ -261,7 +198,7 @@ function CardClicked() {
           >
             <span class="flex items-center">
               Liked {skipedUserName}
-              <img src={greenHeart} class="h-5 ml-1" alt="greenHeart" />
+              <img src={redHeart} class="h-5 ml-1" alt="greenHeart" />
             </span>
           </div>
         )}
@@ -271,7 +208,10 @@ function CardClicked() {
             role="alert"
             style={{ zIndex: 1 }}
           >
-            <span className="flex items-center">Blocked {skipedUserName} <img src={blockCross} class="h-5 ml-1" alt="blockCross" /></span>
+            <span className="flex items-center">
+              Blocked {skipedUserName}{" "}
+              <img src={blockCross} class="h-5 ml-1" alt="blockCross" />
+            </span>
           </div>
         )}
       </div>
@@ -306,13 +246,13 @@ function CardClicked() {
               </a>
 
               <div className="buttons">
-                  <img
+                <img
                   className="h-12 transform transition-all duration-300 hover:scale-110"
                   src={blockCross}
                   alt="block-button"
                   onClick={blockUser}
                 />
-                <img 
+                <img
                   className="h-12 transform transition-all duration-300 hover:scale-110"
                   src={greenHeart}
                   alt="like-button"
@@ -330,10 +270,6 @@ function CardClicked() {
         </>
       ) : (
         <>
-          {/*    <div className={lightMode ? "text-white flex justify-end ml-64 mt-2 text-sm absolute" : "text-black flex justify-end ml-64 mt-2 text-sm absolute"}> 
-        Log Out
-      </div> */}{" "}
-          {/* HERES THE LOG OUT*/}
           <div class="flex flex-wrap place-items-center h-screen medidas">
             {lightMode ? (
               <div
@@ -358,13 +294,6 @@ function CardClicked() {
                     <div class="flex items-center mt-2">
                       <div class="pl-3">
                         <div class="text-pink2 text-sm new-tags font-custom">
-                          {/*  {tags.map(({ tag_name, id }) => {
-                          return (
-                            <button key={id}>
-                              <p className="new-tags text-white mx-3">{tag_name}</p>
-                            </button>
-                          );
-                        })} */}
                           {tags.join(", ")}
                         </div>
                       </div>
@@ -416,8 +345,7 @@ function CardClicked() {
                     <div class="flex items-center mt-2">
                       <div class="pl-3">
                         <div class="text-pink2 text-sm font-custom ">
-                         
-                           {tags.join(", ")} 
+                          {tags.join(", ")}
                         </div>
                       </div>
                     </div>

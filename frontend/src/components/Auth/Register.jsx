@@ -1,6 +1,6 @@
+import blinder from "../../api/blinder";
 import "./styles/Register.css";
 import { useState } from "react";
-import blinder from "../../api/blinder";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../../App";
@@ -12,7 +12,6 @@ const Register = () => {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-  // const [fechaNacimiento, setFechaNacimiento] = useState(""); // implementar
 
   const [confirmPass, setConfirmPass] = useState("");
 
@@ -20,8 +19,7 @@ const Register = () => {
 
   const [age, setAge] = useState("");
 
-  const { setIsLoggedIn, setUserData, setIsLogin, isLogin, setheaderSt } =
-    useContext(UserContext);
+  const { setIsLoggedIn, setUserData, setheaderSt } = useContext(UserContext);
 
   const handleSignInClick = () => {
     navigate("/login");
@@ -39,7 +37,6 @@ const Register = () => {
         });
 
         if (res.status === 201) {
-          //auth user
           setIsLoggedIn(true);
           setUserData(res.data);
           navigate("/app/create_profile");

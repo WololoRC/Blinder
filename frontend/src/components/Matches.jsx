@@ -1,17 +1,17 @@
+import blinder from "../api/blinder";
 import { Card } from "./Card";
 import { UserContext } from "../App";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CiDark } from "react-icons/ci";
-import blinder from "../api/blinder";
 import { MdDarkMode } from "react-icons/md";
 export function Matches() {
-  const { userData, lightMode, setLightMode, headerSt } = useContext(UserContext);
+  const { userData, lightMode, setLightMode, headerSt } =
+    useContext(UserContext);
 
-  const [userDataFrom, setUserDataFrom] = useState({})
- 
+  const [userDataFrom, setUserDataFrom] = useState({});
 
-    if (headerSt){
+  if (headerSt) {
     useEffect(() => {
       const fetchData = async () => {
         try {
@@ -21,35 +21,25 @@ export function Matches() {
             },
           });
           const userDataFromApi = res.data;
-          setUserDataFrom(userDataFromApi)
-          console.log(res + "its meeee lolencio");
-  
-          // Resto del código...
+          setUserDataFrom(userDataFromApi);
         } catch (error) {
           console.error(error);
         }
       };
       fetchData();
     }, []);
-    }
-  
- 
+  }
 
-  
   const link =
     userDataFrom &&
     userDataFrom.user &&
     "https://robohash.org/" + userDataFrom.user.username;
 
-
-    const name =  userDataFrom &&
-    userDataFrom.user && userDataFrom.user.username
-  
+  const name = userDataFrom && userDataFrom.user && userDataFrom.user.username;
 
   const navigate = useNavigate();
   return (
     <>
-
       <div
         className="flex items-center justify-between absolute ml-20"
         id="MyProfile"

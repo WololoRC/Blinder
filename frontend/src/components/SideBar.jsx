@@ -1,27 +1,15 @@
+import "./classes/SideBarST2.css";
 import React, { useState, useEffect } from "react";
-import { SideBarProfile } from "./SideBarProfile";
-import { DiscoverMatches } from "./DiscoverMatches";
 import { MessagesBar } from "./MessagesBar";
 import { Matches } from "./Matches";
-import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../App";
-import SideBarST2 from "./classes/SideBarST2.css";
-import { CiCircleChevDown } from "react-icons/ci";
-import { CiChat2 } from "react-icons/ci";
-import { FiChevronsDown } from "react-icons/fi";
-import { BiMoon } from "react-icons/bi";
-import { FaRegWindowClose, FaAdjust, FaBell } from "react-icons/fa";
 import blinder from "../api/blinder";
 import ChatContainer from "../pages/ChatContainer";
-import { current } from "tailwindcss/colors";
 import { BsChatDots } from "react-icons/bs";
 
-function SideBar({ feedData }) {
+function SideBar() {
   const [componentes, setComponentes] = useState([]);
-  const [hideComponent, setHideComponent] = useState(false);
-
-  /* const [chatOn, setChatOn] = useState(false); */
 
   const [chatId, setChatId] = useState("");
 
@@ -31,10 +19,15 @@ function SideBar({ feedData }) {
 
   const [userOneState, setUserOneState] = useState("");
 
-  const [userTwoState, setUserTwoState] = useState("");
-
-  const { userData, lightMode, setIndex, chatOn, setChatOn, setNameH1, globalName } =
-    useContext(UserContext);
+  const {
+    userData,
+    lightMode,
+    setIndex,
+    chatOn,
+    setChatOn,
+    setNameH1,
+    globalName,
+  } = useContext(UserContext);
 
   const handleClickMessage = (index) => {
     setChatOn(true);
@@ -58,7 +51,6 @@ function SideBar({ feedData }) {
   useEffect(() => {
     const getChats = async () => {
       const res = await blinder.get(`/chat/inbox/${userData.id}/`);
-      console.log(JSON.stringify(res) + "soy el chat");
 
       if (
         Array.isArray(res.data["as user_one"]) &&

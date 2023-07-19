@@ -7,6 +7,7 @@ import { RxCrossCircled } from "react-icons/rx";
 import {BsTrash3} from "react-icons/bs"
 
 import blinder from "../api/blinder";
+import { MdLightMode } from "react-icons/md";
 
 const EditProfile = () => {
 
@@ -24,7 +25,7 @@ const EditProfile = () => {
 
   const [tags, setTags] = useState([]);
 
-  const { response, userData, setUserData, setTagsGlobal } =
+  const { response, userData, setUserData, setTagsGlobal, lightMode } =
     useContext(UserContext);
 
 
@@ -138,7 +139,7 @@ const EditProfile = () => {
         if (isSelected && selected) {
           tagClass += " selected";
         } else {
-          tagClass += " bg-gray-300";
+          tagClass += " bg-pink2 text-white";
         }
       }
     
@@ -195,14 +196,14 @@ const EditProfile = () => {
           <span>Changes applied succesfully</span>
         </div>
       )}
-      <div className="formulario-container bg-gradient-to-r from-black1 to-black3">
+      <div className={lightMode ? "formulario-container bg-gradient-to-r from-black1 to-black3" : "formulario-container bg-white"}>
         <Link className="" to="/app/profile/">
-          <RxCrossCircled color="white" size={25} />
+          <RxCrossCircled color={lightMode ? "white" : "black"} size={25} />
         </Link>
-        <h1 className="">Edit Profile</h1>
+        <h1 className={lightMode ? "text-white" : "tex-black"}>Edit Profile</h1>
 
         <form onSubmit={handleSubmit}>
-          <label className="label-description text-white" htmlFor="descripcion">
+          <label className={lightMode ? "label-description text-white" : "label-description text-black"} htmlFor="descripcion">
             Description
           </label>
           <textarea
@@ -219,7 +220,7 @@ const EditProfile = () => {
           ></textarea>
           <br />
           <br />
-          <h1>What are you interested in?</h1>
+          <h1 className={lightMode ? "text-white" : "text-white"}>What are you interested in?</h1>
           <div className="tags formulario-derecha overflow-x-scroll ">
             {renderedTags}
           </div>
@@ -235,7 +236,7 @@ const EditProfile = () => {
             onClick={() => setDeleteAccount(true)}
             className="ml-4 text-white font-bold"
           >
-            <span className="flex items-center">Delete account <BsTrash3 className="ml-1"/></span>
+            <span className={lightMode ? "text-white flex items-center" : "text-black flex items-center"}>Delete account <BsTrash3 color={lightMode ? "white" : "black"} className="ml-1"/></span>
           </button>
         </form>
       </div>

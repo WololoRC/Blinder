@@ -1,23 +1,12 @@
 import "./App.css";
-import { useState, useEffect, CSSProperties } from "react";
+import Login from "./components/Auth/Login";
+import Application from "./Application";
+import { useState, useEffect} from "react";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import ClipLoader from "react-spinners/BeatLoader";
 import Loading from "./Loading";
-// import { Feed } from "./pages/Feed";
 import Register from "./components/Auth/Register";
 import { Home } from "./pages/Home";
 import { createContext } from "react";
-import Feed from "./pages/Feed";
-import ChatContainer from "./pages/ChatContainer";
-import Login from "./components/Auth/Login";
-import Application from "./Application";
-import { AiOutlineUnorderedList } from "react-icons/ai";
-
-// import { Profile } from "./pages/Profile";
-/* import { ProtectedRoute } from "./components/Login/ProtectedRoute"; */
-// import { CreateProfile } from "./pages/CreateProfile";
-// import { ProtectedRoutes } from "./context/ProtectedRoutes";
-
 export const UserContext = createContext();
 
 function App() {
@@ -108,7 +97,6 @@ function App() {
           <Routes>
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
-            {/*   <Route path="chat" element={<ChatContainer />} /> */}
             <Route path="register" element={<Register />} />
 
             <Route

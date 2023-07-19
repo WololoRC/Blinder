@@ -18,19 +18,8 @@ const Login = () => {
     navigate("/register");
   };
 
-  const {
-    isLoggedIn,
-    setIsLoggedIn,
-    setUserData,
-    setResponse,
-    isLogin,
-    setIsLogin,
-    setheaderSt,
-  } = useContext(UserContext);
-
-  useEffect(() => {
-    console.log(isLoggedIn);
-  }, [isLoggedIn]);
+  const { setIsLoggedIn, setUserData, setResponse, setheaderSt } =
+    useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,12 +32,10 @@ const Login = () => {
         });
 
         if (res.status === 200) {
-          //auth user
           setIsLoggedIn(true);
           setUserData(res.data);
-          localStorage.setItem("userData", JSON.stringify(res.data)); 
+          localStorage.setItem("userData", JSON.stringify(res.data));
           setResponse(res);
-          console.log(res);
           navigate("/app/feed");
           const token = res.data.token;
           setheaderSt(token);
@@ -120,47 +107,6 @@ const Login = () => {
           </div>
         </div>
       </div>
-      {/*   <div className="background-container-login bg-fantasyli">
-        <div>
-          <h3 className="h1-new">Don't have an account?</h3>
-          <button
-            className="h2-try text-white bg-epicpink"
-            onClick={() => setIsLogin(!isLogin)}
-          >
-            Register
-          </button>
-        </div>
-        <div>
-          <div className="form-container bg-fantasyviolet">
-            <h1 className="text-white">Start Matching Now!</h1>
-            <form onSubmit={handleSubmit}>
-              <label className="text-white" htmlFor="username">
-                Username
-              </label>
-              <input
-                type="text"
-                name="username"
-                onChange={(e) => setUser(e.target.value)}
-                value={user}
-                className="text-white"
-              />
-              <label className="text-white" htmlFor="password">
-                Password
-              </label>
-              <input
-                type="password"
-                name="password"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                className="text-white"
-              />
-              <button className="submit-button-login bg-epicpink" type="submit">
-                Log In
-              </button>
-            </form>
-          </div>
-        </div>
-      </div> */}
     </>
   );
 };
